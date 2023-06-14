@@ -47,7 +47,8 @@ public class Base {
     //   private final ArrayList<Account_old> accArray = new ArrayList<>();
 
     public boolean emptyBase() {
-        return file.length() == 0;
+ //       System.out.println("lrngth"+file.length());
+        return file.length() == 20;
     }
 
     //       return accArray.size() == 0;
@@ -75,7 +76,11 @@ public class Base {
             System.out.println("не удалось добавить аккаунт");
             throw new RuntimeException(e);
         }
-
+        try {
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 //        newAcc.setAccountName(name);
 //        newAcc.setAccountPassword(pass);
 //        accArray.add(newAcc);
