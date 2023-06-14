@@ -47,17 +47,20 @@ public class Base {
     //   private final ArrayList<Account_old> accArray = new ArrayList<>();
 
     public boolean emptyBase() {
- //       System.out.println("lrngth"+file.length());
-        return file.length() == 20;
+        //       System.out.println("lrngth"+file.length());
+        File fileBase = new File(file);
+        System.out.println("fileBase.length()=" + fileBase.length());
+        return fileBase.length() == 0;
     }
 
     //       return accArray.size() == 0;
-    public void addAccount(String name, int pass) {
+    public void addAccount(String name, int pass) throws IOException {
+        String lineSeparator = System.lineSeparator();
         //       Account newAcc = new Account();
-       // String str;
+        // String str;
         //String delimiter;
         //String[] subStr;
-        String headLine = "!    ID   !   name    !  password !";
+        String headLine = "!\tID\t!\tname\t!\tpassword\t!" + lineSeparator;
 
         // newAcc.setAccountID(nextID);
 
@@ -66,22 +69,18 @@ public class Base {
 //        // Вывод результата на экран
 //        System.out.println(subStr[2]);
         int ID = getLastID();
+
         ID++;
-        try {
-            if (file.length() == 0) {
-                fileWriter.write(headLine);
-            }
-            fileWriter.write("!    " + ID + "   !   " + name + "    !   " + pass + "    !");
-        } catch (IOException e) {
-            System.out.println("не удалось добавить аккаунт");
-            throw new RuntimeException(e);
+
+        if (emptyBase()) {
+            fileWriter.write(headLine);
         }
-        try {
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-//        newAcc.setAccountName(name);
+        String newAccount = "!\t" + ID + "\t!\t" + name + "\t!\t" + pass + "\tn!" + lineSeparator;
+        fileWriter.write(newAccount);
+
+
+        fileWriter.close();
+        //        newAcc.setAccountName(name);
 //        newAcc.setAccountPassword(pass);
 //        accArray.add(newAcc);
 
@@ -152,7 +151,7 @@ public class Base {
 //        } while (account != null || !subStr[1].equals(name));
 //        secondSubStr = subStr[2].split("  !", 2);// Password with  !;
 //        password = secondSubStr[0];//separate "Password" and  "    !"
-        String password = getAccuont(name, "password");
+        String password = getAccuont("password", name);
         return password.hashCode();// выдача пароля в скрытом хеше
 
 //        for (Account accounts : accArray) {
@@ -165,7 +164,7 @@ public class Base {
 //        case "":
 //            case "":
 //                String accName;
-        boolean exist ;//= false;
+        boolean exist;//= false;
 //        ArrayList accArray;
 //        for (Account accounts : accArray) {
 //            accName = accounts.getName();
@@ -176,6 +175,9 @@ public class Base {
 
 
     private String getAccuont(String part, String name) {
+        if (emptyBase()) {
+            return "0";
+        }
 //        int Password = 0;//begin number for default
 //        int positionInStr = 0;
         String account;
@@ -196,11 +198,11 @@ public class Base {
                 firstIndex = 1;
                 secondIndex = 1;
             case "password":
-                delimiter = "     !";
+                delimiter = "\t!";
                 firstIndex = 3;
                 secondIndex = 1;
             case "ID":
-                delimiter = "!    ";
+                delimiter = "!\t";
                 firstIndex = 0;
                 secondIndex = 2;
             default:
@@ -215,15 +217,16 @@ public class Base {
                 System.out.println("Не удалось прочитать файл базы данных");
                 throw new RuntimeException(e);
             }
-            subStr = account.split("    !   ", 3);
+            subStr = account.split("\t!\t", 3);
             // ===========password search by name================
-        } while (!subStr[1].equals(name));
+        } while (account != null && !subStr[1].equals(name));//while (!subStr[1].equals(name));
         //while (account != null && !subStr[1].equals(name));
-        secondSubStr = subStr[firstIndex].split(delimiter, 2);// Password with  !;
-        partAcc = secondSubStr[secondIndex];//separate "Password"
-        if (part.equals("password")){
-            partAcc=Integer.toString(partAcc.hashCode());
-        }// and  "    !"
+        if (part.equals("name")) {
+            partAcc = subStr[firstIndex];
+        }else {secondSubStr = subStr[firstIndex].split(delimiter, 2);
+        // Password with  !;
+        partAcc = secondSubStr[secondIndex];}//separate "Password"
+        // and  "    !"
         return partAcc;// выдача пароля в скрытом хеше
 
 //        for (Account accounts : accArray) {
@@ -323,5 +326,5 @@ public class Base {
 ////        }
 //    }
 }
-//14.06.23 14:06:02
+//14.06.23 16:40:02
 

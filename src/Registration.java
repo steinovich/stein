@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Registration {
     private final Scanner scan = new Scanner(System.in);
 
-    public void regAcc(Base base) {
+    public void regAcc(Base base) throws IOException {
         //===============================
         //input  name
         //===============================
@@ -14,15 +15,18 @@ public class Registration {
         //===============================
         //check Existing Name in Base
         //===============================
-        boolean exist;
-        do {
+        boolean exist = true;
+//        if (base.emptyBase()) {
+//            exist = false;
+//        }
+        while (exist) {
             exist = base.checkExistName(name);
             if (exist) {
                 System.out.println("Аккаунт с таким именем уже существует ");
                 System.out.println("Введите другое имя пользователя:");
                 name = scan.nextLine();
             }
-        } while (exist);
+        }
         //===============================
         //input  password
         //===============================

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 class Authentication {
@@ -9,7 +10,7 @@ class Authentication {
     //===============================
     //main  Authentication Function
     //===============================
-    void authFunc(Base base) {
+    void authFunc(Base base) throws IOException {
         try_count = 3;
         boolean auth;
 
@@ -109,7 +110,7 @@ class Authentication {
     //===============================
     //check Empty Base
     //===============================
-    void ifEmptyBaseWrite(Base base) {
+    void ifEmptyBaseWrite(Base base) throws IOException {
         Answer answer = new Answer();
         if (base.emptyBase()) {
             System.out.println("База данных пуста");
