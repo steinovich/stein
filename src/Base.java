@@ -1,4 +1,5 @@
 
+import javax.sound.sampled.Line;
 import java.io.*;
 
 public class Base {
@@ -9,7 +10,7 @@ public class Base {
 
     {
         try {
-            fileWriter = new FileWriter(file,true);
+            fileWriter = new FileWriter(file, true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -52,13 +53,27 @@ public class Base {
     public boolean emptyBase() {
         return file.length() == 0;
     }
+
     //       return accArray.size() == 0;
     public void addAccount(String name, int pass) {
- //       Account newAcc = new Account();
+        //       Account newAcc = new Account();
+        String str;
+        String delimeter;
+        String[] subStr;
+        String headLine = "!    ID   !   name    !  password !";
+
         // newAcc.setAccountID(nextID);
-        int ID=getLastID();
+
+//        delimeter = "!"; // Разделитель
+//        subStr = str.split(delimeter, 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
+//        // Вывод результата на экран
+//        System.out.println(subStr[2]);
+        if (file.length() == 0) {
+            fileWriter.write(headLine);
+        }
+        String ID = getLastID();
         ID++;
-        fileWriter.write(ID+"   !   "+name+"    !   "+pass+"    !");
+        fileWriter.write("!    " + ID + "   !   " + name + "    !   " + pass + "    !");
 
 //        newAcc.setAccountName(name);
 //        newAcc.setAccountPassword(pass);
@@ -66,35 +81,120 @@ public class Base {
 
     }
 
-    int getLastID()  {
-        String str="";
-        int ID=;
-        String strOut="";
-        String delimeter;
-        String[] subStr;
-        while(str!=null){
-            strOut=str;
-            str=bufferReader.readLine();
-            str = "ID!name!password!";
-            delimeter = "!"; // Разделитель
-            subStr = str.split(delimeter, 3); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
-            // Вывод результата на экран
-            for(int i = 0; i < subStr.length; i++) {
-                System.out.println(subStr[i]);
-        }return ID;
-    }
-
-    public int getPass(String namePass) {
+    int getLastID() {
         int Password = 0;//begin number for default
-        int positionInStr =0;
+        int positionInStr = 0;
+        int ID;
+        String lastAccount;
+        String account = "";
+        String IDStr;
+        String delimeter = "   !  "; // Разделитель
+        String[] subStr;
+        String[] secondSubStr;// = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
+        // Вывод результата на экран
+        //   subStr = subStr[2].split("  !", 2);
+        //  System.out.println(subStr[1]);
 
-//===========password search by name================
+        do {
+            try {
+                lastAccount=account;
+                account = bufferReader.readLine();
+            } catch (IOException e) {
+                System.out.println("Не удалось прочитать файл базы данных");
+                throw new RuntimeException(e);
+            }
+            //str = "ID!name!password!";
+            //delimeter = "   !  "; // Разделитель
+            subStr = lastAccount.split(delimeter, 3);
+            // ===========password search by name================
+        } while (account != null);
+        secondSubStr = subStr[0].split("    !   ", 2);// "ID" whith "!  ";
+        IDStr = secondSubStr[1];//separate "ID" and  "!    "
+        ID=Integer.parseInt(IDStr)
+            return  ID;
+        }
+
+
+    public int getPass(String name) {
+        int Password = 0;//begin number for default
+        int positionInStr = 0;
+        String account = "";
+        String password;
+        String delimeter = "   !  "; // Разделитель
+        String[] subStr;
+        String[] secondSubStr;// = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
+        // Вывод результата на экран
+        //   subStr = subStr[2].split("  !", 2);
+        //  System.out.println(subStr[1]);
+
+        do {
+            try {
+                account = bufferReader.readLine();
+            } catch (IOException e) {
+                System.out.println("Не удалось прочитать файл базы данных");
+                throw new RuntimeException(e);
+            }
+            //str = "ID!name!password!";
+            //delimeter = "   !  "; // Разделитель
+            subStr = account.split(delimeter, 3);
+            // ===========password search by name================
+        } while (account != null || !subStr[1].equals(name));
+        secondSubStr = subStr[2].split("  !", 2);// Password whith  !;
+        password = secondSubStr[0];//separate "Password" and  "    !"
+        return password.hashCode();// выдача пароля в скрытом хеше
+
 //        for (Account accounts : accArray) {
 //            if (accounts.getName().equals(name)) {
 //                Password = accounts.getPass();
-            }
+    }
+
+    private String getAccPart(String part,String name) {
+//        int Password = 0;//begin number for default
+//        int positionInStr = 0;
+        String account;
+        String password;
+        String delimeter ; // Разделитель
+        String[] subStr;
+        String[] secondSubStr;
+        int firstIndex;
+        int secondIndex;
+        String partAcc;
+        // = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
+        // Вывод результата на экран
+        //   subStr = subStr[2].split("  !", 2);
+        //  System.out.println(subStr[1]);
+        switch (part) {
+            case "name":
+                delimeter=" !    ";
+                firstIndex=2;
+                // secondIndex=2;
+            case "password":
+                delimeter="     !";
+                firstIndex=3;
+                secondIndex=1;
+            case "ID":
+                delimeter="!    ";
+                firstIndex=0;
+                secondIndex=2;
+
         }
-        return 0;// Password;
+        do {
+            try {
+                account = bufferReader.readLine();
+            } catch (IOException e) {
+                System.out.println("Не удалось прочитать файл базы данных");
+                throw new RuntimeException(e);
+            }
+            subStr = account.split("    !   ", 3);
+            // ===========password search by name================
+        } while (account != null || !subStr[1].equals(name));
+        secondSubStr = subStr[firstIndex].split(delimeter, 2);// Password whith  !;
+        partAcc = secondSubStr[secondIndex];//separate "Password" and  "    !"
+        return partAcc;// выдача пароля в скрытом хеше
+
+//        for (Account accounts : accArray) {
+//            if (accounts.getName().equals(name)) {
+//                Password = accounts.getPass();
     }
 
     boolean checkExistName(String name) {
@@ -138,7 +238,56 @@ public class Base {
         System.out.println(result);
         fileWriter.flush();
         fileWriter.close();
+    }
+}
+    private String getAccPart(String part,String name) {
+//        int Password = 0;//begin number for default
+//        int positionInStr = 0;
+        String account;
+        String password;
+        String delimeter ; // Разделитель
+        String[] subStr;
+        String[] secondSubStr;
+        int firstIndex;
+        int secondIndex;
+        String partAcc;
+        // = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
+        // Вывод результата на экран
+        //   subStr = subStr[2].split("  !", 2);
+        //  System.out.println(subStr[1]);
+switch (part) {
+    case "name":
+        delimeter=" !    ";
+    firstIndex=2;
+   // secondIndex=2;
+        case "password":
+            delimeter="     !";
+            firstIndex=3;
+            secondIndex=1;
+    case "ID":
+        delimeter="!    ";
+        firstIndex=0;
+        secondIndex=2;
 
+}
+        do {
+            try {
+                account = bufferReader.readLine();
+            } catch (IOException e) {
+                System.out.println("Не удалось прочитать файл базы данных");
+                throw new RuntimeException(e);
+            }
+            subStr = account.split("    !   ", 3);
+            // ===========password search by name================
+        } while (account != null || !subStr[1].equals(name));
+        secondSubStr = subStr[firstIndex].split(delimeter, 2);// Password whith  !;
+        partAcc = secondSubStr[secondIndex];//separate "Password" and  "    !"
+        return partAcc;// выдача пароля в скрытом хеше
+
+//        for (Account accounts : accArray) {
+//            if (accounts.getName().equals(name)) {
+//                Password = accounts.getPass();
+    }
 //////    void testConnection() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException {
 //////        String url = "jdbc:mysql://localhost/store";
 //////        String username = "root";
@@ -151,4 +300,5 @@ public class Base {
 ////        }
 //    }
     }
+    //14.06.23
 
