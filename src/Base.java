@@ -186,6 +186,8 @@ public class Base {
         String delimiter; // Разделитель
        // String[] subStr=new String[10];
         String[] subStr;
+        subStr=new String[5];
+        subStr[1]="";
         String[] secondSubStr;
         int firstIndex;
         int secondIndex;
@@ -239,7 +241,7 @@ public class Base {
 //            accountLast=account;
            // firstStep=false;
             // ===========password search by name================
-        }  while (account != null && !subStr[1].equals(name))//while (!subStr[1].equals(name));
+        }  while (account != null && !subStr[1].equals(name));//while (!subStr[1].equals(name));
         //while (account != null && !subStr[1].equals(name));
         if (part.equals("name")) {
             partAcc = subStr[firstIndex];
