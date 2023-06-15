@@ -16,7 +16,7 @@ class Authentication {
 
         Answer input = new Answer();
         do {
-            ifEmptyBaseWrite(base);
+//            ifEmptyBaseWrite(base);
 
             System.out.println("Аутентификация:");
             System.out.println("Введите ваше имя пользователя:");
@@ -110,17 +110,17 @@ class Authentication {
     //===============================
     //check Empty Base
     //===============================
-    void ifEmptyBaseWrite(Base base) throws IOException {
-        Answer answer = new Answer();
-        if (base.emptyBase()) {
-            System.out.println("База данных пуста");
-            System.out.println("Зарегистрируйте хотя бы одного пользователя ");
-            System.out.println("Зарегистрировать? ");
-
-            if (answer.checkCommands().equals("yes")) {
-                Registration reg = new Registration();
-                reg.regAcc(base);
-            }
-        }
-    }
+//    void ifEmptyBaseWrite(Base base) throws IOException {
+//        Answer answer = new Answer();
+//        if (base.emptyBase()) {
+//            System.out.println("База данных пуста");
+//            System.out.println("Зарегистрируйте хотя бы одного пользователя ");
+//            System.out.println("Зарегистрировать? ");
+//
+//            if (answer.checkCommands().equals("yes")) {
+//                Registration reg = new Registration();
+//                reg.regAcc(base);
+//            }
+//        }
+   // }
 }

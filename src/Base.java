@@ -30,13 +30,7 @@ public class Base {
             System.out.println("Ошибка при создании базы даннных");
             throw new RuntimeException(e);
         }
-        FileReader fileReader; //= null;
-        try {
-            fileReader = new FileReader(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        bufferReader = new BufferedReader(fileReader);
+
         //       int n = 0;
 
         System.out.println("Base:" + file);
@@ -75,7 +69,7 @@ public class Base {
         if (emptyBase()) {
             fileWriter.write(headLine);
         }
-        String newAccount = "!\t" + ID + "\t!\t" + name + "\t!\t" + pass + "\tn!" + lineSeparator;
+        String newAccount = "!\t" + ID + "\t!\t" + name + "\t!\t" + pass + "\t!" + lineSeparator;
         fileWriter.write(newAccount);
 
 
@@ -175,51 +169,77 @@ public class Base {
 
 
     private String getAccuont(String part, String name) {
-        if (emptyBase()) {
-            return "0";
-        }
+//        if (emptyBase()) {
+//            return "0";
+//        }
 //        int Password = 0;//begin number for default
 //        int positionInStr = 0;
+        FileReader fileReader; //= null;
+        try {
+            fileReader = new FileReader(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        bufferReader = new BufferedReader(fileReader);
         String account;
         //String password;
         String delimiter; // Разделитель
+       // String[] subStr=new String[10];
         String[] subStr;
         String[] secondSubStr;
         int firstIndex;
         int secondIndex;
         String partAcc;
+        String accountLast;
+     //   boolean firstStep=true;
         // = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
         // Вывод результата на экран
         //   subStr = subStr[2].split("  !", 2);
         //  System.out.println(subStr[1]);
         switch (part) {
             case "name":
+                System.out.println("part name");
                 delimiter = "";
                 firstIndex = 1;
                 secondIndex = 1;
+                break;
             case "password":
+                System.out.println("part password");
                 delimiter = "\t!";
                 firstIndex = 3;
                 secondIndex = 1;
+                break;
             case "ID":
+                System.out.println("part ID");
                 delimiter = "!\t";
                 firstIndex = 0;
                 secondIndex = 2;
+                break;
             default:
                 delimiter = "";
                 firstIndex = 0;
                 secondIndex = 0;
         }
-        do {
+        try {
+            account = bufferReader.readLine();
+            account = bufferReader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        do{if(account != null) {
+            //    if(firstStep) account=bufferReader.readLine();
+            System.out.println("acc" + account);
+            subStr = account.split("\t!\t", 3);
             try {
                 account = bufferReader.readLine();
             } catch (IOException e) {
-                System.out.println("Не удалось прочитать файл базы данных");
                 throw new RuntimeException(e);
             }
-            subStr = account.split("\t!\t", 3);
+        }
+//            accountLast=account;
+           // firstStep=false;
             // ===========password search by name================
-        } while (account != null && !subStr[1].equals(name));//while (!subStr[1].equals(name));
+        }  while (account != null && !subStr[1].equals(name))//while (!subStr[1].equals(name));
         //while (account != null && !subStr[1].equals(name));
         if (part.equals("name")) {
             partAcc = subStr[firstIndex];
