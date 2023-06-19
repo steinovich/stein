@@ -58,7 +58,7 @@ class Authentication {
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(Base base, String name) {
+    boolean authenticationFunction(Base base, String name) throws IOException {
        // Answer answer = new Answer();
         boolean auth = false;
         int basePass = base.getPass(name);

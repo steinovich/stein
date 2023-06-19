@@ -5,15 +5,15 @@ import java.io.*;
 public class Base {
     String dir = "e:/JavaBase/";
     String file = dir + "base.txt";
-    BufferedReader bufferReader;
     FileWriter fileWriter;
 
     public Base() {
         try {
             fileWriter = new FileWriter(file, true);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+
         }
+
 
         //dir = "e:/JavaBase/";
         //file = dir + "base.txt";
@@ -44,7 +44,7 @@ public class Base {
         //       System.out.println("lrngth"+file.length());
         File fileBase = new File(file);
         System.out.println("fileBase.length()=" + fileBase.length());
-        return fileBase.length() == 0;
+        return fileBase.length() < 30;
     }
 
     //       return accArray.size() == 0;
@@ -71,8 +71,6 @@ public class Base {
         }
         String newAccount = "!\t" + ID + "\t!\t" + name + "\t!\t" + pass + "\t!" + lineSeparator;
         fileWriter.write(newAccount);
-
-
         fileWriter.close();
         //        newAcc.setAccountName(name);
 //        newAcc.setAccountPassword(pass);
@@ -80,12 +78,19 @@ public class Base {
 
     }
 
-    int getLastID() {
+    int getLastID() throws IOException {
 //        int Password = 0;//begin number for default
 //        int positionInStr = 0;
         int ID;
         String IDStr;
-        IDStr = getAccuont("ID", "");
+        File fileBase = new File(file);
+
+        if (fileBase.length() < 4) {
+            IDStr = "0";
+        } else {
+
+            IDStr = getAccount("ID", "");
+        }
 //        String lastAccount;
 //        String account = "";
 //        String IDStr;
@@ -119,7 +124,7 @@ public class Base {
     }
 
 
-    public int getPass(String name) {
+    public int getPass(String name) throws IOException {
 //        int Password = 0;//begin number for default
 //        int positionInStr = 0;
 //        String account = "";
@@ -145,7 +150,7 @@ public class Base {
 //        } while (account != null || !subStr[1].equals(name));
 //        secondSubStr = subStr[2].split("  !", 2);// Password with  !;
 //        password = secondSubStr[0];//separate "Password" and  "    !"
-        String password = getAccuont("password", name);
+        String password = getAccount("password", name);
         return password.hashCode();// выдача пароля в скрытом хеше
 
 //        for (Account accounts : accArray) {
@@ -153,7 +158,7 @@ public class Base {
 //                Password = accounts.getPass();
     }
 
-    boolean checkExistName(String name) {
+    boolean checkExistName(String name) throws IOException {
 //        switch (mode){
 //        case "":
 //            case "":
@@ -163,37 +168,41 @@ public class Base {
 //        for (Account accounts : accArray) {
 //            accName = accounts.getName();
 //            if (accName.equals(name)) {
-        exist = getAccuont("name", name).equals(name);
+        File fileBase = new File(file);
+
+        if (fileBase.length() < 30) {
+            exist = false;
+        } else {
+            exist = getAccount("name", name).equals(name);
+        }
         return (exist);
     }
 
 
-    private String getAccuont(String part, String name) {
+    private String getAccount(String part, String name) throws IOException {
 //        if (emptyBase()) {
 //            return "0";
 //        }
 //        int Password = 0;//begin number for default
 //        int positionInStr = 0;
+
         FileReader fileReader; //= null;
         try {
             fileReader = new FileReader(file);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        bufferReader = new BufferedReader(fileReader);
-        String account;
-        //String password;
+        BufferedReader bufferReader = new BufferedReader(fileReader);
+        String account = null;
         String delimiter; // Разделитель
-       // String[] subStr=new String[10];
         String[] subStr;
-        subStr=new String[5];
-        subStr[1]="";
+        subStr = new String[5];
+        subStr[1] = "";
         String[] secondSubStr;
         int firstIndex;
         int secondIndex;
         String partAcc;
-        String accountLast;
-     //   boolean firstStep=true;
+        //   boolean firstStep=true;
         // = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
         // Вывод результата на экран
         //   subStr = subStr[2].split("  !", 2);
@@ -222,32 +231,25 @@ public class Base {
                 firstIndex = 0;
                 secondIndex = 0;
         }
-        try {
-            account = bufferReader.readLine();
-            account = bufferReader.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        do{if(account != null) {
-            //    if(firstStep) account=bufferReader.readLine();
+        account = bufferReader.readLine();
+        account = bufferReader.readLine();
+
+        while (account != null && !subStr[1].equals(name)) {
             System.out.println("acc" + account);
             subStr = account.split("\t!\t", 3);
-            try {
-                account = bufferReader.readLine();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-//            accountLast=account;
-           // firstStep=false;
+            account = bufferReader.readLine();
+            //            accountLast=account;
+            // firstStep=false;
             // ===========password search by name================
-        }  while (account != null && !subStr[1].equals(name));//while (!subStr[1].equals(name));
+        } //while (!subStr[1].equals(name));
         //while (account != null && !subStr[1].equals(name));
         if (part.equals("name")) {
             partAcc = subStr[firstIndex];
-        }else {secondSubStr = subStr[firstIndex].split(delimiter, 2);
-        // Password with  !;
-        partAcc = secondSubStr[secondIndex];}//separate "Password"
+        } else {
+            secondSubStr = subStr[firstIndex].split(delimiter, 2);
+            // Password with  !;
+            partAcc = secondSubStr[secondIndex];
+        }//separate "Password"
         // and  "    !"
         return partAcc;// выдача пароля в скрытом хеше
 
