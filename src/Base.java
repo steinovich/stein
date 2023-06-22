@@ -29,7 +29,7 @@ public class Base {
 
         //       int n = 0;
 
-        System.out.println("Base:" + file);
+        //  System.out.println("Base:" + file);
 
         //      void writeBase (dir, file);
     }
@@ -39,7 +39,6 @@ public class Base {
     public boolean emptyBase() {
         //       System.out.println("lrngth"+file.length());
         File fileBase = new File(file);
-        System.out.println("fileBase.length()=" + fileBase.length());
         return fileBase.length() < 30;
     }
 
@@ -210,19 +209,16 @@ public class Base {
         //  System.out.println(subStr[1]);
         switch (part) {
             case "name":
-                System.out.println("part name");
                 delimiter = "";
                 firstIndex = 1;
                 secondIndex = 1;
                 break;
             case "password":
-                System.out.println("part password");
                 delimiter = "\t!";
                 firstIndex = 2;
                 secondIndex = 0;
                 break;
             case "ID":
-                System.out.println("part ID");
                 delimiter = "!\t";
                 firstIndex = 0;
                 secondIndex = 1;
