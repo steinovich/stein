@@ -91,19 +91,10 @@ class Authentication {
 
             //=====================check input=======================
 
-//                if (answer.checkCommands().equals("yes")) {
-//
-//                    Registration reg = new Registration();
-//                    reg.regAcc(base);
-//                }
 
 
         }
 
-//        if (try_count == 0) {
-//            System.out.println("Заблокировано");
-//            try_count = 3;
-        //           auth = false;
 
 
         return auth;
@@ -112,18 +103,5 @@ class Authentication {
     //===============================
     //check Empty Base
     //===============================
-//    void ifEmptyBaseWrite(Base base) throws IOException {
-//        Answer answer = new Answer();
-//        if (base.emptyBase()) {
-//            System.out.println("База данных пуста");
-//            System.out.println("Зарегистрируйте хотя бы одного пользователя ");
-//            System.out.println("Зарегистрировать? ");
-//
-//            if (answer.checkCommands().equals("yes")) {
-//                Registration reg = new Registration();
-//                reg.regAcc(base);
-//            }
-//        }
-    // }
 }
 //25.06.23

@@ -10,9 +10,6 @@ public class Base {
     public Base() {
 
 
-
-        //dir = "e:/JavaBase/";
-        //file = dir + "base.txt";
         System.out.println("Создание Базы данных");
         File directory = new File(dir);
         boolean created = directory.mkdir();
@@ -27,17 +24,9 @@ public class Base {
             throw new RuntimeException(e);
         }
 
-        //       int n = 0;
-
-        //  System.out.println("Base:" + file);
-
-        //      void writeBase (dir, file);
     }
-//    String lineSeparator = System.getProperty("line.separator");
-    //   private final ArrayList<Account_old> accArray = new ArrayList<>();
 
     public boolean emptyBase() {
-        //       System.out.println("lrngth"+file.length());
         File fileBase = new File(file);
         return fileBase.length() < 30;
     }
@@ -50,18 +39,9 @@ public class Base {
             System.out.println(e);
         }
         String lineSeparator = System.lineSeparator();
-        //       Account newAcc = new Account();
-        // String str;
-        //String delimiter;
-        //String[] subStr;
         String headLine = "!\tID\t!\tname\t!\tpass\t!" + lineSeparator;
 
-        // newAcc.setAccountID(nextID);
 
-//        delimiter = "!"; // Разделитель
-//        subStr = str.split(delimiter, 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
-//        // Вывод результата на экран
-//        System.out.println(subStr[2]);
         int ID = getLastID();
 
         ID++;
@@ -72,15 +52,10 @@ public class Base {
         String newAccount = "!\t" + ID + "\t!\t" + name + "\t!\t" + pass + "\t!" + lineSeparator;
         fileWriter.write(newAccount);
         fileWriter.close();
-        //        newAcc.setAccountName(name);
-//        newAcc.setAccountPassword(pass);
-//        accArray.add(newAcc);
 
     }
 
     int getLastID() throws IOException {
-//        int Password = 0;//begin number for default
-//        int positionInStr = 0;
         int ID;
         String IDStr;
         File fileBase = new File(file);
@@ -91,12 +66,6 @@ public class Base {
 
             IDStr = getAccount("ID", null);
         }
-//        String lastAccount;
-//        String account = "";
-//        String IDStr;
-//        String delimiter = "   !  "; // Разделитель
-//        String[] subStr;
-//        String[] secondSubStr;
 
         ID = Integer.parseInt(IDStr);
         return ID;// = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
@@ -125,49 +94,13 @@ public class Base {
 
 
     protected int getPass(String name) throws IOException {
-//        int Password = 0;//begin number for default
-//        int positionInStr = 0;
-//        String account = "";
-//        String password;
-//        String delimiter = "   !  "; // Разделитель
-//        String[] subStr;
-//        String[] secondSubStr;// = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
-//        // Вывод результата на экран
-//        //   subStr = subStr[2].split("  !", 2);
-//        //  System.out.println(subStr[1]);
-//
-//        do {
-//            try {
-//                account = bufferReader.readLine();
-//            } catch (IOException e) {
-//                System.out.println("Не удалось прочитать файл базы данных");
-//                throw new RuntimeException(e);
-//            }
-//            //str = "ID!name!password!";
-//            //delimiter = "   !  "; // Разделитель
-//            subStr = account.split(delimiter, 3);
-//            // ===========password search by name================
-//        } while (account != null || !subStr[1].equals(name));
-//        secondSubStr = subStr[2].split("  !", 2);// Password with  !;
-//        password = secondSubStr[0];//separate "Password" and  "    !"
-        String password = getAccount("password", name);
-        return Integer.parseInt( password);// выдача пароля в скрытом хеше
 
-//        for (Account accounts : accArray) {
-//            if (accounts.getName().equals(name)) {
-//                Password = accounts.getPass();
+        String password = getAccount("password", name);
+        return Integer.parseInt(password);// выдача пароля в скрытом хеше
     }
 
     boolean checkExistName(String name) throws IOException {
-//        switch (mode){
-//        case "":
-//            case "":
-//                String accName;
-        boolean exist;//= false;
-//        ArrayList accArray;
-//        for (Account accounts : accArray) {
-//            accName = accounts.getName();
-//            if (accName.equals(name)) {
+        boolean exist;
         File fileBase = new File(file);
 
         if (fileBase.length() < 30) {
@@ -180,13 +113,9 @@ public class Base {
 
 
     private String getAccount(String part, String name) throws IOException {
-//        if (emptyBase()) {
-//            return "0";
-//        }
-//        int Password = 0;//begin number for default
-//        int positionInStr = 0;
 
-        FileReader fileReader; //= null;
+
+        FileReader fileReader;
         try {
             fileReader = new FileReader(file);
         } catch (FileNotFoundException e) {
@@ -202,11 +131,7 @@ public class Base {
         int firstIndex;
         int secondIndex;
         String partAcc;
-        //   boolean firstStep=true;
-        // = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
         // Вывод результата на экран
-        //   subStr = subStr[2].split("  !", 2);
-        //  System.out.println(subStr[1]);
         switch (part) {
             case "name":
                 delimiter = "";
@@ -233,7 +158,8 @@ public class Base {
 
         while (account != null && !subStr[1].equals(name)) {
             //        System.out.println("acc" + account);
-            subStr = account.split("\t!\t", 3);
+            subStr = account.split("\t!\t", 3);        // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
+
             account = bufferReader.readLine();
             //            accountLast=account;
             // firstStep=false;
@@ -250,102 +176,8 @@ public class Base {
         // and  "    !"
         return partAcc;// выдача пароля в скрытом хеше
 
-//        for (Account accounts : accArray) {
-//            if (accounts.getName().equals(name)) {
-//                Password = accounts.getPass();
     }
 
-
-//    static void writeBase() throws IOException {
-//        System.out.println("Write base:");
-//        int n = 0;
-//        File directory = new File(dir);
-//        boolean created = directory.mkdir();
-//        File base = new File(file);
-//        System.out.println("file:" + file);
-//
-//        created = base.createNewFile();
-//        if (created)
-//            System.out.println("Base has been created");
-//        else {
-//            System.out.println("Base already exist");
-//        }
-//
-//        String lineSeparator = System.lineSeparator();
-//        String result = "";
-//        FileWriter fileWriter = new FileWriter(file, true);
-//        while (n < 5) {
-//
-//            String text = String.format("%s result!", n);
-//            n++;
-//            result += text + lineSeparator;
-//        }
-//
-//        fileWriter.write(result);
-//        System.out.println(result);
-//        fileWriter.flush();
-//        fileWriter.close();
-//    }
-
-//    private String getAccPart(String part,String name) {
-//        int Password = 0;//begin number for default
-//        int positionInStr = 0;
-//        String account;
-//        String password;
-//        String delimiter ; // Разделитель
-//        String[] subStr;
-//        String[] secondSubStr;
-//        int firstIndex;
-//        int secondIndex;
-//        String partAcc;
-//        // = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
-//        // Вывод результата на экран
-//        //   subStr = subStr[2].split("  !", 2);
-//        //  System.out.println(subStr[1]);
-//switch (part) {
-//    case "name":
-//        delimeter=" !    ";
-//    firstIndex=2;
-//   // secondIndex=2;
-//        case "password":
-//            delimeter="     !";
-//            firstIndex=3;
-//            secondIndex=1;
-//    case "ID":
-//        delimeter="!    ";
-//        firstIndex=0;
-//        secondIndex=2;
-//
-//}
-//        do {
-//            try {
-//                account = bufferReader.readLine();
-//            } catch (IOException e) {
-//                System.out.println("Не удалось прочитать файл базы данных");
-//                throw new RuntimeException(e);
-//            }
-//            subStr = account.split("    !   ", 3);
-//            // ===========password search by name================
-//        } while (account != null || !subStr[1].equals(name));
-//        secondSubStr = subStr[firstIndex].split(delimeter, 2);// Password with  !;
-//        partAcc = secondSubStr[secondIndex];//separate "Password" and  "    !"
-//        return partAcc;// выдача пароля в скрытом хеше
-
-//        for (Account accounts : accArray) {
-//            if (accounts.getName().equals(name)) {
-//                Password = accounts.getPass();
-//    }
-//////    void testConnection() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, SQLException {
-//////        String url = "jdbc:mysql://localhost/store";
-//////        String username = "root";
-//////        String password = "root";
-//////        Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-//////        try (Connection conn = DriverManager.getConnection(url, username, password)) {
-//////
-//////            System.out.println("Connection to Store DB successful!");
-////
-////        }
-//    }
 }
 //23.06.23
 

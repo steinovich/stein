@@ -15,10 +15,7 @@ public class Registration {
         //===============================
         //check Existing Name in Base
         //===============================
-        boolean exist = true;
-        if (base.emptyBase()) {
-            exist = false;
-        }
+        boolean exist = !base.emptyBase();
         while (exist) {
             exist = base.checkExistName(name);
             if (exist) {

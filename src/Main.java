@@ -1,6 +1,5 @@
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
+
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -8,7 +7,7 @@ public class Main {
 
 
         Base base = new Base();
-        boolean out = false;
+        boolean out;
         Answer answer = new Answer();
         Authentication auth = new Authentication();
 
@@ -26,7 +25,6 @@ public class Main {
                         reg.regAcc(base);
                         break;
                     case "no":
-                        out = true;
                         break;
                 }
             } else {
@@ -49,8 +47,6 @@ public class Main {
 
 
                 //==============exit request============================
-//                System.out.println("Выйти из программы?:да,yes/нет,no");
-//                out = "yes".equals(answer.checkCommands());
             }
             System.out.println("Выйти из программы?:да,yes/нет,no");
             out = "yes".equals(answer.checkCommands());
