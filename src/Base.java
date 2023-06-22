@@ -1,6 +1,5 @@
 
 import java.io.*;
-//import java.util.ArrayList;
 
 public class Base {
     String dir = "e:/JavaBase/";
@@ -31,7 +30,6 @@ public class Base {
         return fileBase.length() < 30;
     }
 
-    //       return accArray.size() == 0;
     public void addAccount(String name, int pass) throws IOException {
         try {
             fileWriter = new FileWriter(file, true);
@@ -68,28 +66,7 @@ public class Base {
         }
 
         ID = Integer.parseInt(IDStr);
-        return ID;// = account.split("   !  ", 4); // Разбить строку str с порогом равным 3, который означает, как много подстрок, должно быть возвращено.
-        // Вывод результата на экран
-        //   subStr = subStr[2].split("  !", 2);
-        //  System.out.println(subStr[1]);
-
-//        do {
-//            try {
-//                lastAccount=account;
-//                account = bufferReader.readLine();
-//            } catch (IOException e) {
-//                System.out.println("Не удалось прочитать файл базы данных");
-//                throw new RuntimeException(e);
-//            }
-//            //str = "ID!name!password!";
-//            //delimiter = "   !  "; // Разделитель
-//            subStr = lastAccount.split(delimiter, 3);
-//            // ===========password search by name================
-//        } while (account != null);
-//        secondSubStr = subStr[0].split("    !   ", 2);// "ID" with "!  ";
-//        IDStr = secondSubStr[1];//separate "ID" and  "!    "
-//        ID=Integer.parseInt(IDStr)
-//            return  ID;
+        return ID;
     }
 
 
@@ -164,8 +141,7 @@ public class Base {
             //            accountLast=account;
             // firstStep=false;
             // ===========password search by name================
-        } //while (!subStr[1].equals(name));
-        //while (account != null && !subStr[1].equals(name));
+        }
         if (part.equals("name")) {
             partAcc = subStr[firstIndex];
         } else {
