@@ -9,7 +9,7 @@ public class Base {
     public Base() {
 
 
-        System.out.println("Создание Базы данных");
+
         File directory = new File(dir);
         boolean created = directory.mkdir();
         File base = new File(file);
@@ -26,6 +26,7 @@ public class Base {
     }
 
     public boolean emptyBase() {
+
         File fileBase = new File(file);
         return fileBase.length() < 30;
     }

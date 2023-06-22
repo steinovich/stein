@@ -6,7 +6,21 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         File jarDir = new File(ClassLoader.getSystemClassLoader().getResource("Main.class").getPath());
-        System.out.println("dir="+jarDir.getAbsolutePath());
+        String dirJar=jarDir.getAbsolutePath();
+        System.out.println("dirJar="+dirJar);
+
+        int indexDotClass=dirJar.indexOf(".class");
+        String dirDotClass=dirJar.substring(0, indexDotClass);
+
+
+
+        int indexClassName=dirDotClass.lastIndexOf("\\");
+        System.out.println("indexClassName="+indexClassName);
+
+        String dirClassName=dirJar.substring(0, indexClassName);
+        System.out.println("work directory="+dirClassName+"      indexDotClass="+indexDotClass);
+
+        System.out.println("Создание Базы данных");
 
 
         Base base = new Base();
