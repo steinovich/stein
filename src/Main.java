@@ -1,9 +1,12 @@
+import java.io.File;
 import java.io.IOException;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
+        File jarDir = new File(ClassLoader.getSystemClassLoader().getResource("Main.class").getPath());
+        System.out.println("dir="+jarDir.getAbsolutePath());
 
 
         Base base = new Base();
@@ -16,7 +19,7 @@ public class Main {
             if (base.emptyBase()) {
                 System.out.println("База данных пуста");
                 System.out.println("Зарегистрируйте хотя бы одного пользователя ");
-                System.out.println("Зарегистрировать? ");
+                System.out.println("Зарегистрировать? Д/Н");
 
                 switch (answer.checkCommands()) {
                     case "yes":

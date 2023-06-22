@@ -80,6 +80,8 @@ public class Base {
         boolean exist;
         File fileBase = new File(file);
 
+
+
         if (fileBase.length() < 30) {
             exist = false;
         } else {

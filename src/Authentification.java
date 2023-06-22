@@ -50,7 +50,7 @@ class Authentication {
                 }
             } while (try_count > 0 && !auth);
         } else {
-            System.out.println("Заблокировано");
+            System.out.println("Аутентификация заблокированa");
         }
 
 
