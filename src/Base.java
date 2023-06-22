@@ -8,11 +8,7 @@ public class Base {
     FileWriter fileWriter;
 
     public Base() {
-        try {
-            fileWriter = new FileWriter(file, true);
-        } catch (IOException e) {
 
-        }
 
 
         //dir = "e:/JavaBase/";
@@ -49,12 +45,17 @@ public class Base {
 
     //       return accArray.size() == 0;
     public void addAccount(String name, int pass) throws IOException {
+        try {
+            fileWriter = new FileWriter(file, true);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
         String lineSeparator = System.lineSeparator();
         //       Account newAcc = new Account();
         // String str;
         //String delimiter;
         //String[] subStr;
-        String headLine = "!\tID\t!\tname\t!\tpassword\t!" + lineSeparator;
+        String headLine = "!\tID\t!\tname\t!\tpass\t!" + lineSeparator;
 
         // newAcc.setAccountID(nextID);
 
@@ -89,7 +90,7 @@ public class Base {
             IDStr = "0";
         } else {
 
-            IDStr = getAccount("ID", "");
+            IDStr = getAccount("ID", null);
         }
 //        String lastAccount;
 //        String account = "";
@@ -124,7 +125,7 @@ public class Base {
     }
 
 
-    public int getPass(String name) throws IOException {
+    protected int getPass(String name) throws IOException {
 //        int Password = 0;//begin number for default
 //        int positionInStr = 0;
 //        String account = "";
@@ -151,7 +152,7 @@ public class Base {
 //        secondSubStr = subStr[2].split("  !", 2);// Password with  !;
 //        password = secondSubStr[0];//separate "Password" and  "    !"
         String password = getAccount("password", name);
-        return password.hashCode();// выдача пароля в скрытом хеше
+        return Integer.parseInt( password);// выдача пароля в скрытом хеше
 
 //        for (Account accounts : accArray) {
 //            if (accounts.getName().equals(name)) {
@@ -193,7 +194,7 @@ public class Base {
             throw new RuntimeException(e);
         }
         BufferedReader bufferReader = new BufferedReader(fileReader);
-        String account = null;
+        String account;
         String delimiter; // Разделитель
         String[] subStr;
         subStr = new String[5];
@@ -217,14 +218,14 @@ public class Base {
             case "password":
                 System.out.println("part password");
                 delimiter = "\t!";
-                firstIndex = 3;
-                secondIndex = 1;
+                firstIndex = 2;
+                secondIndex = 0;
                 break;
             case "ID":
                 System.out.println("part ID");
                 delimiter = "!\t";
                 firstIndex = 0;
-                secondIndex = 2;
+                secondIndex = 1;
                 break;
             default:
                 delimiter = "";
@@ -235,7 +236,7 @@ public class Base {
         account = bufferReader.readLine();
 
         while (account != null && !subStr[1].equals(name)) {
-            System.out.println("acc" + account);
+            //        System.out.println("acc" + account);
             subStr = account.split("\t!\t", 3);
             account = bufferReader.readLine();
             //            accountLast=account;

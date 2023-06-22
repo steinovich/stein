@@ -3,13 +3,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
+    public static void main(String[] args) throws IOException {
 
 
 
         Base base = new Base();
         boolean out = false;
         Answer answer = new Answer();
+        Authentication auth = new Authentication();
 
 
         do {
@@ -42,7 +43,6 @@ public class Main {
                         reg.regAcc(base);
                         break;
                     case "yes":
-                        Authentication auth = new Authentication();
                         auth.authFunc(base);
                         break;
                 }
