@@ -1,26 +1,12 @@
-import java.io.File;
 import java.io.IOException;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        File jarDir = new File(ClassLoader.getSystemClassLoader().getResource("Main.class").getPath());
-        String dirJar=jarDir.getAbsolutePath();
-        System.out.println("dirJar="+dirJar);
-
-        int indexDotClass=dirJar.indexOf(".class");
-        String dirDotClass=dirJar.substring(0, indexDotClass);
-
-
-
-        int indexClassName=dirDotClass.lastIndexOf("\\");
-        System.out.println("indexClassName="+indexClassName);
-
-        String dirClassName=dirJar.substring(0, indexClassName);
-        System.out.println("work directory="+dirClassName+"      indexDotClass="+indexDotClass);
-
-        System.out.println("Создание Базы данных");
+        String choseLanguage;
+Language language=new Language();
+        System.out.println(Language.createdBase);
 
 
         Base base = new Base();
@@ -31,9 +17,9 @@ public class Main {
 
         do {
             if (base.emptyBase()) {
-                System.out.println("База данных пуста");
-                System.out.println("Зарегистрируйте хотя бы одного пользователя ");
-                System.out.println("Зарегистрировать? Д/Н");
+                System.out.println(Language.emptyBase);
+                System.out.println(Language.regAtLestOne);
+                System.out.println(Language.doYouWantReg);
 
                 switch (answer.checkCommands()) {
                     case "yes":
@@ -45,7 +31,7 @@ public class Main {
                         break;
                 }
             } else {
-                System.out.println("У Вас уже есть аккаунт?:да,yes/нет,no/выход,exit");
+                System.out.println(Language.doYouHaveAcc);
 //=====================General menu========================================
 //=====================checking input commands========================================
 
@@ -53,7 +39,7 @@ public class Main {
                     case "exit":
                         break;
                     case "no":
-                        System.out.println("Регистрация нового пользователя");
+                        System.out.println(Language.regNewAccount);
                         Registration reg = new Registration();
                         reg.regAcc(base);
                         break;
@@ -65,10 +51,16 @@ public class Main {
 
                 //==============exit request============================
             }
-            System.out.println("Выйти из программы?:да,yes/нет,no");
+            System.out.println(Language.doYouWantExit);
             out = "yes".equals(answer.checkCommands());
         } while (!out);
     }
+    //================================================================
+
+    //=========additional function====================================
+
+    //================================================================
+
 
 
 }

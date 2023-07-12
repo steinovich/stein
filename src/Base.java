@@ -16,10 +16,10 @@ public class Base {
         try {
             created = base.createNewFile() & created;
             if (created) {
-                System.out.println("База данных успешно создана");
+                System.out.println(Language.createdBase);
             }
         } catch (IOException e) {
-            System.out.println("Ошибка при создании базы даннных");
+            System.out.println(Language.errorCreateBase);
             throw new RuntimeException(e);
         }
 

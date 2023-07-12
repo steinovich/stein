@@ -8,7 +8,7 @@ public class Registration {
         //===============================
         //input  name
         //===============================
-        System.out.println("Введите имя пользователя:");
+        System.out.println(Language.inputName);
         String name;
         name = scan.nextLine();
 
@@ -19,21 +19,21 @@ public class Registration {
         while (exist) {
             exist = base.checkExistName(name);
             if (exist) {
-                System.out.println("Аккаунт с таким именем уже существует ");
-                System.out.println("Введите другое имя пользователя:");
+                System.out.println(Language.NameAlreadyExist);
+                System.out.println(Language.inputOtherName);
                 name = scan.nextLine();
             }
         }
         //===============================
         //input  password
         //===============================
-        System.out.println("Введите пароль:");
+        System.out.println(Language.inputPassword);
         int pass = scan.nextLine().hashCode();
         //===============================
         //Add account in Base
         //===============================
         base.addAccount(name, pass);
-        System.out.println("Регистрации прошла успешно");
+        System.out.println(Language.registrationCompleted);
     }
 }
 

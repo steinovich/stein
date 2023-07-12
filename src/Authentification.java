@@ -19,13 +19,13 @@ class Authentication {
             do {
 //            ifEmptyBaseWrite(base);
 
-                System.out.println("Аутентификация:");
-                System.out.println("Введите ваше имя пользователя:");
+                System.out.println(Language.autentification);
+                System.out.println(Language.inputName);
                 String name = scan.nextLine();
 
                 //==============checkOutProgram==================================
                 if (name.equals("exit") || name.equals("e") || name.equals("отмена")) {
-                    System.out.println("Отмена");
+                    System.out.println(Language.cancel);
                     break;
                 }
                 //==============check NameExistInBase============================
@@ -36,8 +36,8 @@ class Authentication {
                     auth = authenticationFunction(base, name);
 
                 } else {
-                    System.out.println("Такого имени в базе не существует");
-                    System.out.println("Зарегистрироваться? да,yes/нет,no");
+                    System.out.println(Language.NameNotExist);
+                    System.out.println(Language.doYouWantReg);
                     //=====================check input=======================
 
                     if (input.checkCommands().equals("yes")) {
@@ -50,7 +50,7 @@ class Authentication {
                 }
             } while (try_count > 0 && !auth);
         } else {
-            System.out.println("Аутентификация заблокированa");
+            System.out.println(Language.autentificationLocked);
         }
 
 
@@ -68,23 +68,23 @@ class Authentication {
 
 
 //===============Input password==========================================
-        System.out.println("Введите пароль:");
+        System.out.println(Language.inputPassword);
         int passIn = scan.nextLine().hashCode();
         //==============checkOutProgram==================================
         if (passIn == "exit".hashCode() || passIn == "выход".hashCode()) {
-            System.out.println("Отмена");
+            System.out.println(Language.cancel);
 
 
             //==================check  password for Authentication=========================
 
         } else if (passIn == basePass) {
             auth = true;
-            System.out.println("Вы успешно прошли аутентификацию!");
+            System.out.println(Language.authentificationCompleted);
 
         } else {
-            System.out.println("имя или пароль неверные");
+            System.out.println(Language.nameOrPasswordWrong);
             try_count--;
-            System.out.println("Осталось попыток " + try_count);
+            System.out.println(Language.numberTry + try_count);
 
             //==============checkOutProgram==================================
 
