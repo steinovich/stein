@@ -1,15 +1,20 @@
 
 import java.io.*;
 
-public class Base {
+public class Base implements BaseInterface{
     String dir = "e:/JavaBase/";
     String file = dir + "base.txt";
     FileWriter fileWriter;
 
     public Base() {
 
+        createOutputFile();
+        }
 
 
+
+    @Override
+    public boolean createOutputFile() {
         File directory = new File(dir);
         boolean created = directory.mkdir();
         File base = new File(file);
@@ -22,7 +27,7 @@ public class Base {
             System.out.println(Language.errorCreateBase);
             throw new RuntimeException(e);
         }
-
+        return created;
     }
 
     public boolean emptyBase() {
@@ -54,7 +59,7 @@ public class Base {
 
     }
 
-    int getLastID() throws IOException {
+    public int getLastID() throws IOException {
         int ID;
         String IDStr;
         File fileBase = new File(file);
@@ -71,13 +76,13 @@ public class Base {
     }
 
 
-    protected int getPass(String name) throws IOException {
+    public int getPass(String name) throws IOException {
 
         String password = getAccount("password", name);
         return Integer.parseInt(password);// выдача пароля в скрытом хеше
     }
 
-    boolean checkExistName(String name) throws IOException {
+    public boolean checkExistName(String name) throws IOException {
         boolean exist;
         File fileBase = new File(file);
 
@@ -92,7 +97,7 @@ public class Base {
     }
 
 
-    private String getAccount(String part, String name) throws IOException {
+    public String getAccount(String part, String name) throws IOException {
 
 
         FileReader fileReader;

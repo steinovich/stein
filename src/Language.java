@@ -2,9 +2,10 @@ import java.io.File;
 import java.util.Scanner;
 
 public class Language {
-    private Scanner scan = new Scanner(System.in);
 
-    String language=scan.nextLine();
+    static String language;
+
+
     static String createdBase;
     static String emptyBase;
     static String errorCreateBase;
@@ -46,7 +47,14 @@ public class Language {
     static String inputOtherName;
     static String inputPassword;
     static String registrationCompleted;
+    static String inputLanguage;
 
+public Language
+    public void setup(){
+        private Scanner scan = new Scanner(System.in);
+        System.out.println(inputLanguage);
+        language=scan.nextLine();
+    }
     public String dirJar(){
 
         System.out.println("chose language:"+);
@@ -76,7 +84,7 @@ public class Language {
 //            "Отмена"
 //            "Такого имени в базе не существует"
 //            "Зарегистрироваться? да,yes/нет,no"
-
+search
 
 //12.07.23
 }
