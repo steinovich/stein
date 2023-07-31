@@ -1,33 +1,28 @@
 
 import java.io.*;
 
-public class Base implements BaseInterface{
+public class Base {
     String dir = "e:/JavaBase/";
     String file = dir + "base.txt";
     FileWriter fileWriter;
 
-    public Base() {
-
-        createOutputFile();
-        }
+    public Base(Language language) {
 
 
 
-    @Override
-    public boolean createOutputFile() {
         File directory = new File(dir);
         boolean created = directory.mkdir();
         File base = new File(file);
         try {
             created = base.createNewFile() & created;
             if (created) {
-                System.out.println(Language.createdBase);
+                System.out.println(language.createdBase);
             }
         } catch (IOException e) {
-            System.out.println(Language.errorCreateBase);
+            System.out.println(language.errorCreateBase);
             throw new RuntimeException(e);
         }
-        return created;
+
     }
 
     public boolean emptyBase() {
@@ -59,7 +54,7 @@ public class Base implements BaseInterface{
 
     }
 
-    public int getLastID() throws IOException {
+    int getLastID() throws IOException {
         int ID;
         String IDStr;
         File fileBase = new File(file);
@@ -76,13 +71,13 @@ public class Base implements BaseInterface{
     }
 
 
-    public int getPass(String name) throws IOException {
+    protected int getPass(String name) throws IOException {
 
         String password = getAccount("password", name);
         return Integer.parseInt(password);// выдача пароля в скрытом хеше
     }
 
-    public boolean checkExistName(String name) throws IOException {
+    boolean checkExistName(String name) throws IOException {
         boolean exist;
         File fileBase = new File(file);
 
@@ -97,7 +92,7 @@ public class Base implements BaseInterface{
     }
 
 
-    public String getAccount(String part, String name) throws IOException {
+    private String getAccount(String part, String name) throws IOException {
 
 
         FileReader fileReader;

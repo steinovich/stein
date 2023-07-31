@@ -2,13 +2,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Registration {
+    Language language;
     private final Scanner scan = new Scanner(System.in);
+    public Registration(Language lng){
+       Language language=lng;
+
+    }
 
     public void regAcc(Base base) throws IOException {
         //===============================
         //input  name
         //===============================
-        System.out.println(Language.inputName);
+        System.out.println(language.inputName);
         String name;
         name = scan.nextLine();
 
@@ -19,21 +24,21 @@ public class Registration {
         while (exist) {
             exist = base.checkExistName(name);
             if (exist) {
-                System.out.println(Language.NameAlreadyExist);
-                System.out.println(Language.inputOtherName);
+                System.out.println(language.NameAlreadyExist);
+                System.out.println(language.inputOtherName);
                 name = scan.nextLine();
             }
         }
         //===============================
         //input  password
         //===============================
-        System.out.println(Language.inputPassword);
+        System.out.println(language.inputPassword);
         int pass = scan.nextLine().hashCode();
         //===============================
         //Add account in Base
         //===============================
         base.addAccount(name, pass);
-        System.out.println(Language.registrationCompleted);
+        System.out.println(language.registrationCompleted);
     }
 }
 

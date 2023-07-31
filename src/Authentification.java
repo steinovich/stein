@@ -2,10 +2,34 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Authentication {
-
+    Language lang;
+//    String autentification=;
+//    String inputName;
+//    String NameNotExist;
+//    String doYouWantReg;
+//
+//    String cancel;
+//    String doYouWantReg;
+//    String doYouWantReg;
+//    String doYouWantReg;
+//    String doYouWantReg;
+//    String doYouWantReg;
     private int try_count = 3;
 
     private final Scanner scan = new Scanner(System.in);
+
+    public Authentication(Language language) {
+        lang=language;
+//        autentification=language.autentification;
+//        inputName=language.inputName;
+//        cancel=language.cancel;
+//        doYouWantReg=language.doYouWantReg;
+//
+//        NameNotExist=language.NameNotExist;
+//        autentification=language.doYouWantReg;
+//        autentification=language.doYouWantReg;
+//        autentification=language.cancel;
+    }
 
     //===============================
     //main  Authentication Function
@@ -19,13 +43,13 @@ class Authentication {
             do {
 //            ifEmptyBaseWrite(base);
 
-                System.out.println(Language.autentification);
-                System.out.println(Language.inputName);
+                System.out.println(lang.authentication);
+                System.out.println(lang.inputName);
                 String name = scan.nextLine();
 
                 //==============checkOutProgram==================================
                 if (name.equals("exit") || name.equals("e") || name.equals("отмена")) {
-                    System.out.println(Language.cancel);
+                    System.out.println(lang.cancel);
                     break;
                 }
                 //==============check NameExistInBase============================
@@ -36,13 +60,13 @@ class Authentication {
                     auth = authenticationFunction(base, name);
 
                 } else {
-                    System.out.println(Language.NameNotExist);
-                    System.out.println(Language.doYouWantReg);
+                    System.out.println(lang.NameNotExist);
+                    System.out.println(lang.doYouWantReg);
                     //=====================check input=======================
 
                     if (input.checkCommands().equals("yes")) {
 
-                        Registration reg = new Registration();
+                        Registration reg = new Registration(lang);
                         reg.regAcc(base);
                         break;
                     }
@@ -50,7 +74,7 @@ class Authentication {
                 }
             } while (try_count > 0 && !auth);
         } else {
-            System.out.println(Language.autentificationLocked);
+            System.out.println(lang.authenticationLocked);
         }
 
 
@@ -68,23 +92,23 @@ class Authentication {
 
 
 //===============Input password==========================================
-        System.out.println(Language.inputPassword);
+        System.out.println(lang.inputPassword);
         int passIn = scan.nextLine().hashCode();
         //==============checkOutProgram==================================
         if (passIn == "exit".hashCode() || passIn == "выход".hashCode()) {
-            System.out.println(Language.cancel);
+            System.out.println(lang.cancel);
 
 
             //==================check  password for Authentication=========================
 
         } else if (passIn == basePass) {
             auth = true;
-            System.out.println(Language.authentificationCompleted);
+            System.out.println(lang.authentificationCompleted);
 
         } else {
-            System.out.println(Language.nameOrPasswordWrong);
+            System.out.println(lang.nameOrPasswordWrong);
             try_count--;
-            System.out.println(Language.numberTry + try_count);
+            System.out.println(lang.numberTry + try_count);
 
             //==============checkOutProgram==================================
 
