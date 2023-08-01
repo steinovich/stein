@@ -42,16 +42,18 @@ public class Language {
         fileReader = new FileReader("Language.conf");
         bufferReader = new BufferedReader(fileReader);
         //  ==================Search all language========================
-
-        String generalLanguage="";
+        String lineSplit;
+        String generalLanguage="1";
         ArrayList<String> allLanguages=new ArrayList<>();
         String line="";
         while (line != null) {
-            line = bufferReader.readLine();
             if (line.contains("=")) {
-                allLanguages.add( line.split("=",2)[2]+" ");
+                lineSplit=line.split("=",0)[1];
+                allLanguages.add( line.split("=",0)[1]+" ");
+
             }
-        }
+            line = bufferReader.readLine();
+        }                System.out.println(allLanguages);
         //  ==================input language========================
 
         while (!allLanguages.contains(generalLanguage)) {
@@ -89,20 +91,25 @@ public class Language {
   //  " not found"
 
     public String searchWord(String word) throws IOException {
-        String[] findWordSplit = new String[2];
+       // String[] findWordSplit = new String[2];
+        String[] findWordSplit=new String[2];
         fileReader = new FileReader(fileLanguage);
         bufferReader = new BufferedReader(fileReader);
         String line="";
         while (line != null&&!line.equals(inputLanguage)){
             line = bufferReader.readLine();
         }
-        while ((line != null &&!line.equals("}"))){
+        while ((line != null &&!line.equals("}")&&line.contains(word))){
             line = bufferReader.readLine();
-            if (line.contains(word)&&line != null) {
-                findWordSplit=line.split(":\t",1);
-            }else System.out.println(languageIsIncorrect+word+notFound);
+
         }
-        return findWordSplit[2];
+        if (line.contains(word)&&line != null) {
+            findWordSplit=line.split(":   ",2);
+            return findWordSplit[1];
+        }else {System.out.println(languageIsIncorrect+word+notFound);
+        return null;
+        }
+       // return findWordSplit[1];
 
     }
 
