@@ -49,7 +49,7 @@ public class Language {
         while (line != null) {
             if (line.contains("=")) {
                 lineSplit=line.split("=",0)[1];
-                allLanguages.add( line.split("=",0)[1]+" ");
+                allLanguages.add( line.split("=",0)[1]+"");
 
             }
             line = bufferReader.readLine();
@@ -96,7 +96,7 @@ public class Language {
         fileReader = new FileReader(fileLanguage);
         bufferReader = new BufferedReader(fileReader);
         String line="";
-        while (line != null&&!line.equals(inputLanguage)){
+        while (line != null&&!line.equals("language="+inputLanguage)){
             line = bufferReader.readLine();
         }
         while ((line != null &&!line.equals("}")&&line.contains(word))){

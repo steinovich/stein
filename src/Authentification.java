@@ -20,15 +20,7 @@ class Authentication {
 
     public Authentication(Language language) {
         lang=language;
-//        autentification=language.autentification;
-//        inputName=language.inputName;
-//        cancel=language.cancel;
-//        doYouWantReg=language.doYouWantReg;
-//
-//        NameNotExist=language.NameNotExist;
-//        autentification=language.doYouWantReg;
-//        autentification=language.doYouWantReg;
-//        autentification=language.cancel;
+
     }
 
     //===============================
