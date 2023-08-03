@@ -8,8 +8,8 @@ public class Registration {
        Language language=lng;
 
     }
-
-    public void regAcc(Base base) throws IOException {
+/**зеленый комментарий*/
+    public void regAcc(Base base,Language language) throws IOException {
         //===============================
         //input  name
         //===============================

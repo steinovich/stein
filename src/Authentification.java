@@ -14,7 +14,7 @@ class Authentication {
 //    String doYouWantReg;
 //    String doYouWantReg;
 //    String doYouWantReg;
-    private int try_count = 3;
+    private int try_count = 5;
 
     private final Scanner scan = new Scanner(System.in);
 
@@ -30,12 +30,12 @@ class Authentication {
         // try_count = 3;
         boolean auth;
 
-        Answer input = new Answer();
+        Answer input = new Answer(lang);
         if (try_count > 0) {
             do {
 //            ifEmptyBaseWrite(base);
 
-                System.out.println(lang.authentication);
+                System.out.println(lang.authentification);
                 System.out.println(lang.inputName);
                 String name = scan.nextLine();
 
@@ -59,14 +59,14 @@ class Authentication {
                     if (input.checkCommands().equals("yes")) {
 
                         Registration reg = new Registration(lang);
-                        reg.regAcc(base);
+                        reg.regAcc(base,lang);
                         break;
                     }
                     break;
                 }
             } while (try_count > 0 && !auth);
         } else {
-            System.out.println(lang.authenticationLocked);
+            System.out.println(lang.authentificationLocked);
         }
 
 

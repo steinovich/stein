@@ -1,3 +1,6 @@
+/***03.08.23*/
+
+/
 import java.io.IOException;
 
 
@@ -6,13 +9,13 @@ public class Main {
 
        // String choseLanguage;
 Language language=new Language();
-language.setInputLanguage();
-        System.out.println(language.createdBase);
+//language.setInputLanguage();
+      //  System.out.println(language.createdBase);
 
 
         Base base = new Base(language);
         boolean out;
-        Answer answer = new Answer();
+        Answer answer = new Answer(language);
         Authentication auth = new Authentication(language);
 
 
@@ -26,7 +29,7 @@ language.setInputLanguage();
                     case "yes":
 
                         Registration reg = new Registration(language);
-                        reg.regAcc(base);
+                        reg.regAcc(base,language);
                         break;
                     case "no":
                         break;
@@ -40,10 +43,20 @@ language.setInputLanguage();
                     case "exit":
                         break;
                     case "no":
+                        System.out.println(language.doYouWantReg);
+                        switch (answer.checkCommands()){
+                            case "no":
+                            case "exit":
+                                break;
+                            case "yes":
+
+
                         System.out.println(language.regNewAccount);
                         Registration reg = new Registration(language);
-                        reg.regAcc(base);
+                        reg.regAcc(base,language);
+                        break;}
                         break;
+
                     case "yes":
                         auth.authFunc(base);
                         break;

@@ -1,8 +1,11 @@
 import java.util.Scanner;
 
 public class Answer {
+    Language language;
     Scanner scan = new Scanner(System.in);
-
+public Answer(Language lng){
+    language=lng;
+}
     public String checkCommands() {
         boolean commandRight = false;
         String out = "";
@@ -40,7 +43,7 @@ public class Answer {
                     out = "exit";
                     break;
                 default:
-                    System.out.println("Введите ДА(Д,д), НЕТ(Н,н) или Выход(В,в) Input YES(Y,y), NO(N,n)!!! or EXIT(E,e)!!!");
+                    System.out.println(language.inputYesNo);
                     command = scan.nextLine();
             }
         } while (!commandRight);
