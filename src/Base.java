@@ -2,28 +2,32 @@
 import java.io.*;
 
 public class Base {
-    String dir = "e:/JavaBase/";
-    String file = dir + "base.txt";
+    //   String dir = "e:/JavaBase/";
+    String file = "base.txt";
     FileWriter fileWriter;
 
     public Base(Language language) {
 
-
-
-        File directory = new File(dir);
-        boolean created = directory.mkdir();
-        File base = new File(file);
-        try {
-            created = base.createNewFile() & created;
-            if (created) {
-                System.out.println(language.createdBase);
+        //if (!existBase(file)) {
+            //        File directory = new File(dir);
+//        boolean created = directory.mkdir();
+            boolean created = true;
+            File base = new File(file);
+            try {
+                created = base.createNewFile() && created;
+                if (created) {
+                    System.out.println(language.createdBase);
+                }
+            } catch (IOException e) {
+                System.out.println(language.errorCreateBase);
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            System.out.println(language.errorCreateBase);
-            throw new RuntimeException(e);
-        }
+       // }
 
     }
+//    public booleanexistBase(){
+//        return exist;
+//    }
 
     public boolean emptyBase() {
 
@@ -80,7 +84,6 @@ public class Base {
     boolean checkExistName(String name) throws IOException {
         boolean exist;
         File fileBase = new File(file);
-
 
 
         if (fileBase.length() < 30) {
@@ -158,5 +161,6 @@ public class Base {
     }
 
 }
+//}
 //09.07.23
 
