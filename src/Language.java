@@ -89,36 +89,24 @@ public class Language {
     }
 
 
-//    public String dirJar(){
-//
-//        System.out.println("chose language:"+);
-//        File jarDir = new File(ClassLoader.getSystemClassLoader().getResource("Main.class").getPath());
-//        String dirJar=jarDir.getAbsolutePath();
-//        System.out.println("dirJar="+dirJar);
-//
-//        int indexDotClass=dirJar.indexOf(".class");
-//        String dirDotClass=dirJar.substring(0, indexDotClass);
-//
-//        int indexClassName=dirDotClass.lastIndexOf("\\");
-//        System.out.println("indexClassName="+indexClassName);
-//
-//        String dirClassName=dirJar.substring(0, indexClassName);
-//        System.out.println("work directory="+dirClassName+"      indexDotClass="+indexDotClass);
-//        return dirClassName;
-//    }
+/*
+    public String dirJar(){
 
-//    "База данных пуста"
-//            "Зарегистрируйте хотя бы одного пользователя "
-//            "Зарегистрировать? Д/Н"
-//            "У Вас уже есть аккаунт?:да,yes/нет,no/выход,exit"
-//            "Регистрация нового пользователя"
-//            "Выйти из программы?:да,yes/нет,no"
-//            "Аутентификация:"
-//            "Введите ваше имя пользователя:"
-//            "Отмена"
-//            "Такого имени в базе не существует"
-//            "Зарегистрироваться? да,yes/нет,no"
+        System.out.println("chose language:"+);
+        File jarDir = new File(ClassLoader.getSystemClassLoader().getResource("Main.class").getPath());
+        String dirJar=jarDir.getAbsolutePath();
+        System.out.println("dirJar="+dirJar);
 
+        int indexDotClass=dirJar.indexOf(".class");
+        String dirDotClass=dirJar.substring(0, indexDotClass);
 
-//12.07.23
+        int indexClassName=dirDotClass.lastIndexOf("\\");
+        System.out.println("indexClassName="+indexClassName);
+
+        String dirClassName=dirJar.substring(0, indexClassName);
+        System.out.println("work directory="+dirClassName+"      indexDotClass="+indexDotClass);
+        return dirClassName;
+    }*/
+/**05.08.23
+*/
 }
