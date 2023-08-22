@@ -1,9 +1,10 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Authentication {
     Language lang;
-//    String autentification=;
+    //    String autentification=;
 //    String inputName;
 //    String NameNotExist;
 //    String doYouWantReg;
@@ -19,7 +20,7 @@ class Authentication {
     private final Scanner scan = new Scanner(System.in);
 
     public Authentication(Language language) {
-        lang=language;
+        lang = language;
 
     }
 
@@ -29,7 +30,10 @@ class Authentication {
     void authFunc(Base base) throws IOException {
         // try_count = 3;
         boolean auth;
+        TryCount tryCountObjecct;
+        tryCountObjecct = new TryCount(try_count, "name");
 
+        ArrayList<String> names = new ArrayList<>();
         Answer input = new Answer(lang);
         if (try_count > 0) {
             do {
@@ -38,6 +42,10 @@ class Authentication {
                 System.out.println(lang.authentification);
                 System.out.println(lang.inputName);
                 String name = scan.nextLine();
+                if (!names.contains(name)) {
+                    tryCountObjecct = new TryCount(try_count, name);
+                    names.add(name);
+                }
 
                 //==============checkOutProgram==================================
                 if (name.equals("exit") || name.equals("e") || name.equals("отмена")) {
@@ -49,7 +57,7 @@ class Authentication {
 
                 //==============start Authentication===============================
                 if (exist) {
-                    auth = authenticationFunction(base, name);
+                    auth = authenticationFunction(base, name, tryCountObjecct);
 
                 } else {
                     System.out.println(lang.NameNotExist);
@@ -59,12 +67,12 @@ class Authentication {
                     if (input.checkCommands().equals("yes")) {
 
                         Registration reg = new Registration(lang);
-                        reg.regAcc(base,lang);
+                        reg.regAcc(base, lang);
                         break;
                     }
                     break;
                 }
-            } while (try_count > 0 && !auth);
+            } while (tryCountObjecct.getTryCount() > 0 && !auth);
         } else {
             System.out.println(lang.authentificationLocked);
         }
@@ -73,12 +81,12 @@ class Authentication {
     }
 
 
-
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(Base base, String name) throws IOException {
+    boolean authenticationFunction(Base base, String name, TryCount tryCount) throws IOException {
         // Answer answer = new Answer();
+
         boolean auth = false;
         int basePass = base.getPass(name);
 
@@ -99,8 +107,8 @@ class Authentication {
 
         } else {
             System.out.println(lang.nameOrPasswordWrong);
-            try_count--;
-            System.out.println(lang.numberTry + try_count);
+            tryCount.setTryCount(tryCount.getTryCount() - 1);
+            System.out.println(lang.numberTry + tryCount.getTryCount());
 
             //==============checkOutProgram==================================
 
@@ -108,9 +116,7 @@ class Authentication {
             //=====================check input=======================
 
 
-
         }
-
 
 
         return auth;
