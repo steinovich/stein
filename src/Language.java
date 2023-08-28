@@ -32,6 +32,8 @@ public class Language {
     public String languageIsIncorrect=searchWord("languageIsIncorrect");
     public String  notFound=searchWord("notFound");
     public String inputYesNo=searchWord("inputYesNo");
+    public String AccountAdded=searchWord("AccountAdded");
+
 //    public String AccountAdded=searchWord("AccountAdded");
     //    public String AccountDeleted=searchWord("AccountDeleted");
 

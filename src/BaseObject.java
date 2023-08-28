@@ -8,20 +8,24 @@ public class BaseObject implements BaseInterface {
     private ObjectOutputStream oos = new ObjectOutputStream(fout);
     private FileInputStream fin = null;
     private ObjectInputStream ois = null;
-    //  ArrayList<Account> accounts;
+    ArrayList<Account> accounts;
 
     public BaseObject(Language language) throws IOException {
         this.language = language;
-
-        if (emptyBase()) {
-            createBase();
-        }
+        accounts = new ArrayList<Account>();
         fout = new FileOutputStream(file);
         oos = new ObjectOutputStream(fout);
         fin = new FileInputStream(file);
         ois = new ObjectInputStream(fin);
 
-        //      accounts = new ArrayList<Account>();
+        accounts = new ArrayList<Account>();
+        if (emptyBase()) {
+            createBase();
+            accounts = new ArrayList<Account>();
+            Account accountNull=new Account();
+            accounts.add(accountNull);
+
+        }
         //  accounts.add(new Account(0, "", 0));
 //        System.out.println(accounts);
 //        oos.writeObject(accounts);
@@ -34,7 +38,7 @@ public class BaseObject implements BaseInterface {
         File fileBase = new File(file);
         created = fileBase.createNewFile();
         //  if (fileBase.exists()) {
-        oos.writeObject(new ArrayList<Account>());
+        //       oos.writeObject(new ArrayList<Account>());
         System.out.println(language.createdBase);
         created = true;
         //created = false;
@@ -49,21 +53,20 @@ public class BaseObject implements BaseInterface {
 //        if (exist) {
 //            lowLengthFile = fileBase.length()<5;
 //        }
-        return fileBase.length() < 5;
+        return (int)fileBase.length() < 5;
     }
 
     @Override
     public void addAccount(String name, int pass) throws IOException, ClassNotFoundException {
         int ID;
         //      System.out.println(ois.readObject());
-
-        ArrayList<Account> accounts = getAccountsArray();
+        accounts =(ArrayList<Account>) ois.readObject();
         //  System.out.println(ois.readObject());
         ID = accounts.size();
         Account account = new Account(ID, name, pass);
         accounts.add(account);
         oos.writeObject(accounts);
-        //        System.out.println(language.AccountAdded);
+                System.out.println(language.AccountAdded);
     }
 
     @Override
@@ -76,8 +79,10 @@ public class BaseObject implements BaseInterface {
         int pass = -1;
         int i = 0;
         ArrayList<Account> accounts = null;
+        FileInputStream fileInput = new FileInputStream(file);
+        ObjectInputStream outInputStream = new ObjectInputStream(fileInput);
         try {
-            accounts = getAccountsArray();
+            accounts = (ArrayList<Account>) outInputStream.readObject();//getAccountsArray();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -94,11 +99,13 @@ public class BaseObject implements BaseInterface {
     public boolean checkExistName(String name) throws IOException {
         boolean exist = false;
         int i = 0;
-        Account account; //= new Account(0, "", 0);// accounts.get(0);
+        FileInputStream fileInput = new FileInputStream(file);
+        ObjectInputStream outInputStream = new ObjectInputStream(fileInput);
+        Account account = new Account(0, "", 0);
 //        accounts.add(account);
         ArrayList<Account> accounts = null;
         try {
-            accounts = getAccountsArray();
+            accounts = (ArrayList<Account>) outInputStream.readObject();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -115,12 +122,6 @@ public class BaseObject implements BaseInterface {
 
     public String getAccount(String part, String name) {
         return null;
-    }
-
-    private ArrayList<Account> getAccountsArray() throws IOException, ClassNotFoundException {
-        fin = new FileInputStream(file);
-        ois = new ObjectInputStream(fin);
-        return (ArrayList<Account>) ois.readObject();
     }
 
 
