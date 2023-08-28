@@ -2,11 +2,11 @@ import java.io.IOException;
 
 public interface BaseInterface {
 
-    boolean createOutputFile();
+    boolean createOutputFile() throws IOException;
 
     boolean emptyBase();
 
-    void addAccount(String name, int pass) throws IOException;
+    void addAccount(String name, int pass) throws IOException, ClassNotFoundException;
 
     int getLastID() throws IOException;
 
@@ -14,10 +14,11 @@ public interface BaseInterface {
 
     boolean checkExistName(String name) throws IOException;
 
-    String getAccount(String part, String name) throws IOException;
+//    String getAccount(String part, String name) throws IOException;
+//    boolean deleteAccount(String part, String name) throws IOException;
 
 }
 //09.07.23
 //23.08.23
-//baseTxt
+//baseAccount2
 

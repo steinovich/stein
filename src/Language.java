@@ -32,6 +32,9 @@ public class Language {
     public String languageIsIncorrect=searchWord("languageIsIncorrect");
     public String  notFound=searchWord("notFound");
     public String inputYesNo=searchWord("inputYesNo");
+//    public String AccountAdded=searchWord("AccountAdded");
+    //    public String AccountDeleted=searchWord("AccountDeleted");
+
 
     public Language() throws IOException {
     }
@@ -81,7 +84,7 @@ public class Language {
         if (line.contains(word+":")&&line != null&&!line.equals("}")) {
             findWordSplit=line.split(":\t",2);
             return findWordSplit[1];
-        }else {System.out.println(languageIsIncorrect+word+notFound+fileLanguage);
+        }else {System.out.println(" |"+word+"|    "+notFound+"    "+fileLanguage);
         return null;
         }
        // return findWordSplit[1];

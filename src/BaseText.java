@@ -1,12 +1,12 @@
 
 import java.io.*;
 
-public class Base {
+public class BaseText {
     //   String dir = "e:/JavaBase/";
     String file = "base.txt";
     FileWriter fileWriter;
 
-    public Base(Language language) {
+    public BaseText(Language language) {
 
         //if (!existBase(file)) {
             //        File directory = new File(dir);

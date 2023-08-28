@@ -27,7 +27,7 @@ class Authentication {
     //===============================
     //main  Authentication Function
     //===============================
-    void authFunc(Base base) throws IOException {
+    void authFunc(BaseObject base) throws IOException, ClassNotFoundException {
         // try_count = 3;
         boolean auth;
         TryCount tryCountObjecct;
@@ -37,7 +37,7 @@ class Authentication {
         Answer input = new Answer(lang);
         if (try_count > 0) {
             do {
-//            ifEmptyBaseWrite(base);
+//            ifEmptyBaseWrite(baseText);
 
                 System.out.println(lang.authentification);
                 System.out.println(lang.inputName);
@@ -84,11 +84,11 @@ class Authentication {
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(Base base, String name, TryCount tryCount) throws IOException {
+    boolean authenticationFunction(BaseObject baseText, String name, TryCount tryCount) throws IOException {
         // Answer answer = new Answer();
 
         boolean auth = false;
-        int basePass = base.getPass(name);
+        int basePass = baseText.getPass(name);
 
 
 //===============Input password==========================================
@@ -123,7 +123,7 @@ class Authentication {
     }
 
     //===============================
-    //check Empty Base
+    //check Empty BaseText
     //===============================
 }
 //25.06.23

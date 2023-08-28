@@ -5,7 +5,7 @@ import java.io.IOException;
 
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
        // String choseLanguage;
 Language language=new Language();
@@ -13,7 +13,7 @@ Language language=new Language();
       //  System.out.println(language.createdBase);
 
 
-        Base base = new Base(language);
+        BaseObject base = new BaseObject(language);
         boolean out;
         Answer answer = new Answer(language);
         Authentication auth = new Authentication(language);
