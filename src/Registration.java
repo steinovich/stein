@@ -9,7 +9,7 @@ public class Registration {
 
     }
 /**зеленый комментарий*/
-    public void regAcc(BaseObject base, Language language) throws IOException, ClassNotFoundException {
+    public void regAcc(BaseInterface base, Language language) throws IOException, ClassNotFoundException {
         //===============================
         //input  name
         //===============================
@@ -23,11 +23,11 @@ public class Registration {
         boolean exist = !base.emptyBase();
         while (exist) {
             exist = base.checkExistName(name);
-            if (exist) {
+         //   if (exist) {
                 System.out.println(language.NameAlreadyExist);
                 System.out.println(language.inputOtherName);
                 name = scan.nextLine();
-            }
+       //     }
         }
         //===============================
         //input  password

@@ -13,7 +13,7 @@ Language language=new Language();
       //  System.out.println(language.createdBase);
 
 
-        BaseObject base = new BaseObject(language);
+        BaseInterface  base = new BaseObject(language);
         boolean out;
         Answer answer = new Answer(language);
         Authentication auth = new Authentication(language);

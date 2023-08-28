@@ -63,7 +63,7 @@ public class Language {
 
         while (!allLanguages.contains(generalLanguage)) {
             System.out.println("input correct language:" + allLanguages);
-            generalLanguage = scan.nextLine();
+            generalLanguage ="eng";// scan.nextLine();
         }
         return generalLanguage;
     }

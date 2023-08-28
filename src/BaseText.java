@@ -1,7 +1,7 @@
 
 import java.io.*;
 
-public class BaseText {
+public class BaseText implements BaseInterface{
     //   String dir = "e:/JavaBase/";
     String file = "base.txt";
     FileWriter fileWriter;
@@ -58,7 +58,7 @@ public class BaseText {
 
     }
 
-    int getLastID() throws IOException {
+    public int getLastID() throws IOException {
         int ID;
         String IDStr;
         File fileBase = new File(file);
@@ -75,13 +75,13 @@ public class BaseText {
     }
 
 
-    protected int getPass(String name) throws IOException {
+    public int getPass(String name) throws IOException {
 
         String password = getAccount("password", name);
         return Integer.parseInt(password);// выдача пароля в скрытом хеше
     }
 
-    boolean checkExistName(String name) throws IOException {
+    public boolean checkExistName(String name) throws IOException {
         boolean exist;
         File fileBase = new File(file);
 

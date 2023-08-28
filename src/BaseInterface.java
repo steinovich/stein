@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public interface BaseInterface {
 
-    boolean createOutputFile() throws IOException;
+ //   boolean createOutputFile() throws IOException;
 
     boolean emptyBase();
 

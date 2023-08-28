@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Account implements Serializable {
+public class Account  implements Serializable{
 
     private int id;
     private String name;
@@ -36,11 +36,11 @@ public class Account implements Serializable {
     public void setPasswordHash(int passwordHash) {
         this.passwordHash = passwordHash;
     }
-    @Override
-    public String toString() {
-        return ("id=\t"+id+"\tname=\t"+name+"\tpassword=\t"+passwordHash);
-//        return new StringBuffer(" ID : ")
-//                .append(this.id).append(" Name : ")
-//                .append(this.name).toString();
-    }
+//    @Override
+//    public String toString() {
+//        return ("id=\t"+id+"\tname=\t"+name+"\tpassword=\t"+passwordHash);
+////        return new StringBuffer(" ID : ")
+////                .append(this.id).append(" Name : ")
+////                .append(this.name).toString();
+//    }
 }

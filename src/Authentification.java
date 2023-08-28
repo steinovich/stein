@@ -27,7 +27,7 @@ class Authentication {
     //===============================
     //main  Authentication Function
     //===============================
-    void authFunc(BaseObject base) throws IOException, ClassNotFoundException {
+    void authFunc(BaseInterface base) throws IOException, ClassNotFoundException {
         // try_count = 3;
         boolean auth;
         TryCount tryCountObjecct;
@@ -84,11 +84,11 @@ class Authentication {
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(BaseObject baseText, String name, TryCount tryCount) throws IOException {
+    boolean authenticationFunction(BaseInterface base, String name, TryCount tryCount) throws IOException {
         // Answer answer = new Answer();
 
         boolean auth = false;
-        int basePass = baseText.getPass(name);
+        int basePass = base.getPass(name);
 
 
 //===============Input password==========================================

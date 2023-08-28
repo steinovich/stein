@@ -8,52 +8,57 @@ public class BaseObject implements BaseInterface {
     private ObjectOutputStream oos = new ObjectOutputStream(fout);
     private FileInputStream fin = null;
     private ObjectInputStream ois = null;
-    ArrayList<Account> accounts;
+    //  ArrayList<Account> accounts;
 
     public BaseObject(Language language) throws IOException {
         this.language = language;
 
         if (emptyBase()) {
-            createOutputFile();
+            createBase();
         }
         fout = new FileOutputStream(file);
         oos = new ObjectOutputStream(fout);
         fin = new FileInputStream(file);
         ois = new ObjectInputStream(fin);
 
-        accounts = new ArrayList<>();
+        //      accounts = new ArrayList<Account>();
+        //  accounts.add(new Account(0, "", 0));
+//        System.out.println(accounts);
+//        oos.writeObject(accounts);
 
 
     }
 
-    @Override
-    public boolean createOutputFile() {
+    public boolean createBase() throws IOException {
         boolean created;
-        if (emptyBase()) {
-            try {
-                oos.writeObject(accounts);
-                System.out.println(language.createdBase);
-                created = true;
-            } catch (IOException e) {
-                System.out.println(language.errorCreateBase);
-                created = false;
-                throw new RuntimeException(e);
-            }
-            return true;
-        } else return false;
+        File fileBase = new File(file);
+        created = fileBase.createNewFile();
+        //  if (fileBase.exists()) {
+        oos.writeObject(new ArrayList<Account>());
+        System.out.println(language.createdBase);
+        created = true;
+        //created = false;
+        return created;
     }
 
     @Override
     public boolean emptyBase() {
+//        boolean lowLengthFile = true;
         File fileBase = new File(file);
-        return fileBase.exists();
- //       return fileBase.exists() && accounts.size() != 0;
+//        boolean exist = fileBase.exists();
+//        if (exist) {
+//            lowLengthFile = fileBase.length()<5;
+//        }
+        return fileBase.length() < 5;
     }
 
     @Override
     public void addAccount(String name, int pass) throws IOException, ClassNotFoundException {
         int ID;
-        accounts = (ArrayList<Account>) ois.readObject();
+        //      System.out.println(ois.readObject());
+
+        ArrayList<Account> accounts = getAccountsArray();
+        //  System.out.println(ois.readObject());
         ID = accounts.size();
         Account account = new Account(ID, name, pass);
         accounts.add(account);
@@ -63,13 +68,19 @@ public class BaseObject implements BaseInterface {
 
     @Override
     public int getLastID() {
-        return accounts.size();
+        return 0;
     }
 
     @Override
-    public int getPass(String name) {
+    public int getPass(String name) throws IOException {
         int pass = -1;
         int i = 0;
+        ArrayList<Account> accounts = null;
+        try {
+            accounts = getAccountsArray();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         Account account = accounts.get(0);
         while (i < accounts.size() && !account.getName().equals(name)) {
             account = accounts.get(i);
@@ -80,11 +91,19 @@ public class BaseObject implements BaseInterface {
     }
 
     @Override
-    public boolean checkExistName(String name) {
+    public boolean checkExistName(String name) throws IOException {
         boolean exist = false;
         int i = 0;
-        Account account = accounts.get(0);
-        while (i < accounts.size() && !account.getName().equals(name)) {
+        Account account; //= new Account(0, "", 0);// accounts.get(0);
+//        accounts.add(account);
+        ArrayList<Account> accounts = null;
+        try {
+            accounts = getAccountsArray();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        while (i < accounts.size() && !exist) {
             account = accounts.get(i);
             i++;
             exist = account.getName().equals(name);
@@ -96,6 +115,12 @@ public class BaseObject implements BaseInterface {
 
     public String getAccount(String part, String name) {
         return null;
+    }
+
+    private ArrayList<Account> getAccountsArray() throws IOException, ClassNotFoundException {
+        fin = new FileInputStream(file);
+        ois = new ObjectInputStream(fin);
+        return (ArrayList<Account>) ois.readObject();
     }
 
 
