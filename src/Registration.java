@@ -20,14 +20,14 @@ public class Registration {
         //===============================
         //check Existing Name in BaseText
         //===============================
-        boolean exist = !base.emptyBase();
+        boolean exist = !base.emptyBaseFile();
         while (exist) {
-            exist = base.checkExistName(name);
-         //   if (exist) {
+            exist =base.checkExistName(name);
+            if (exist) {
                 System.out.println(language.NameAlreadyExist);
                 System.out.println(language.inputOtherName);
                 name = scan.nextLine();
-       //     }
+            }
         }
         //===============================
         //input  password

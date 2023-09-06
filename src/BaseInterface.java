@@ -4,7 +4,7 @@ public interface BaseInterface {
 
  //   boolean createOutputFile() throws IOException;
 
-    boolean emptyBase();
+    boolean emptyBaseFile();
 
     void addAccount(String name, int pass) throws IOException, ClassNotFoundException;
 

@@ -20,7 +20,7 @@ Language language=new Language();
 
 
         do {
-            if (base.emptyBase()) {
+            if (base.emptyBaseFile()) {
                 System.out.println(language.emptyBase);
                 System.out.println(language.regAtLestOne);
                 System.out.println(language.doYouWantReg);

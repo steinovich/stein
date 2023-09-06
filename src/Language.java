@@ -32,9 +32,10 @@ public class Language {
     public String languageIsIncorrect=searchWord("languageIsIncorrect");
     public String  notFound=searchWord("notFound");
     public String inputYesNo=searchWord("inputYesNo");
-    public String AccountAdded=searchWord("AccountAdded");
 
-//    public String AccountAdded=searchWord("AccountAdded");
+  //  public String AccountAdded=searchWord("AccountAdded");
+
+   // public String AccountAdded=searchWord("AccountAdded");
     //    public String AccountDeleted=searchWord("AccountDeleted");
 
 
@@ -76,6 +77,7 @@ public class Language {
         fileReader = new FileReader(fileLanguage);
         bufferReader = new BufferedReader(fileReader);
         String line="";
+//        line = bufferReader.readLine();
         while (line != null&&!line.equals("language="+inputLanguage)){
             line = bufferReader.readLine();
         }

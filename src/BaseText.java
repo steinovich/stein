@@ -29,7 +29,7 @@ public class BaseText implements BaseInterface{
 //        return exist;
 //    }
 
-    public boolean emptyBase() {
+    public boolean emptyBaseFile() {
 
         File fileBase = new File(file);
         return fileBase.length() < 30;
@@ -49,7 +49,7 @@ public class BaseText implements BaseInterface{
 
         ID++;
 
-        if (emptyBase()) {
+        if (emptyBaseFile()) {
             fileWriter.write(headLine);
         }
         String newAccount = "!\t" + ID + "\t!\t" + name + "\t!\t" + pass + "\t!" + lineSeparator;
@@ -93,6 +93,8 @@ public class BaseText implements BaseInterface{
         }
         return (exist);
     }
+
+
 
 
     private String getAccount(String part, String name) throws IOException {
