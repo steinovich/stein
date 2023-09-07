@@ -17,9 +17,9 @@ public class BaseObject implements BaseInterface {
     public BaseObject(Language language) throws IOException {
         this.language = language;
         ArrayList<Account> accounts = new ArrayList<Account>();
-        FileOutputStream fout = new FileOutputStream(file);
-        ObjectOutputStream oos = new ObjectOutputStream(fout);
-//        FileInputStream fin = new FileInputStream(file);
+//        FileOutputStream fout = new FileOutputStream(file);
+//        ObjectOutputStream oos = new ObjectOutputStream(fout);
+////        FileInputStream fin = new FileInputStream(file);
 //        ObjectInputStream ois = new ObjectInputStream(fin);
 
         accounts = new ArrayList<Account>();
@@ -54,14 +54,14 @@ public class BaseObject implements BaseInterface {
 
     @Override
     public boolean emptyBaseFile() {
-//        boolean lowLengthFile = true;
-        File fileBase = new File(file);
+        boolean lowLengthFile = true;
+                  File fileBase = new File(file);
         int length = (int) fileBase.length();
-//        boolean exist = fileBase.exists();
-//        if (exist) {
-//            lowLengthFile = fileBase.length()<5;
-//        }
-        return length < 10;
+        boolean exist = fileBase.exists();
+        if (exist) {
+            lowLengthFile = fileBase.length()<5;
+        }
+        return length < 5;
     }
 
     @Override
@@ -70,18 +70,18 @@ public class BaseObject implements BaseInterface {
         //ArrayList<Account> accounts = new ArrayList<Account>();
         FileOutputStream fout = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fout);
-        FileInputStream fin = new FileInputStream(file);
-        ObjectInputStream ois = new ObjectInputStream(fin);
-        Account account = new Account(0, "", 0);
+//        FileInputStream fin = new FileInputStream(file);
+//        ObjectInputStream ois = new ObjectInputStream(fin);
+        Account account ;//= new Account(0, "", 0);
         ArrayList<Account> accounts = new ArrayList<Account>();
-        accounts.add(account);
+       // accounts.add(account);
         //accounts = (ArrayList<Account>) ois.readObject();
         ID = accounts.size();
         account = new Account(ID, name, pass);
         accounts.add(account);
         oos.writeObject(accounts);
-        fin.close();
-        ois.close();
+//        fin.close();
+//        ois.close();
         fout.close();
         oos.close();
         //     System.out.println(language.AccountAdded);
@@ -145,19 +145,19 @@ public class BaseObject implements BaseInterface {
     }
 
 
-    public String getAccount(String part, String name) {
-        return null;
-    }
-
-    public ArrayList<Account> getAccountsArray() throws IOException, ClassNotFoundException {
-        FileInputStream fin = new FileInputStream(file);
-        ObjectInputStream ois = new ObjectInputStream(fin);
-        ois.readObject();
-        ArrayList<Account> accounts = (ArrayList<Account>) ois.readObject();
-        fin.close();
-        ois.close();
-        return accounts;
-    }
+//    public String getAccount(String part, String name) {
+//        return null;
+//    }
+//
+//    public ArrayList<Account> getAccountsArray() throws IOException, ClassNotFoundException {
+//        FileInputStream fin = new FileInputStream(file);
+//        ObjectInputStream ois = new ObjectInputStream(fin);
+//        ois.readObject();
+//        ArrayList<Account> accounts = (ArrayList<Account>) ois.readObject();
+//        fin.close();
+//        ois.close();
+//        return accounts;
+//    }
 
 
 //    public boolean deleteAccount(String name) throws IOException, ClassNotFoundException {
