@@ -15,26 +15,42 @@ class Authentication {
 //    String doYouWantReg;
 //    String doYouWantReg;
 //    String doYouWantReg;
-    private int try_count = 5;
+    int try_count = 5;
+    Scanner scan;
+    Registration reg;
+    ArrayList<String> names;
+    Answer input;
+    ArrayList<String> checkedNames;
 
-    private final Scanner scan = new Scanner(System.in);
+    TryCount tryCountObjects;
+    ArrayList<TryCount> tryCountObjecctArray;
 
     public Authentication(Language language) {
+        try_count=5;
         lang = language;
+        Registration reg = new Registration(lang);
+        scan = new Scanner(System.in);
+        names = new ArrayList<>();
+        input = new Answer(lang);
+        names = new ArrayList<>();
+        tryCountObjecctArray=new ArrayList<>();
+//        tryCountObjecct = new TryCount(try_count, null);
 
+
+        ArrayList<String> checkedNames = new ArrayList<>();
     }
-
     //===============================
     //main  Authentication Function
     //===============================
+
     void authFunc(BaseInterface base) throws IOException, ClassNotFoundException {
         // try_count = 3;
         boolean auth;
-        TryCount tryCountObjecct;
-        tryCountObjecct = new TryCount(try_count, "name");
+//        TryCount tryCountObjecct;
+//        tryCountObjecct = new TryCount(try_count, null);
 
-        ArrayList<String> names = new ArrayList<>();
-        Answer input = new Answer(lang);
+//        ArrayList<String> checkedNames = new ArrayList<>();
+//        Answer input = new Answer(lang);
         if (try_count > 0) {
             do {
 //            ifEmptyBaseWrite(baseText);
@@ -42,9 +58,10 @@ class Authentication {
                 System.out.println(lang.authentification);
                 System.out.println(lang.inputName);
                 String name = scan.nextLine();
-                if (!names.contains(name)) {
-                    tryCountObjecct = new TryCount(try_count, name);
-                    names.add(name);
+                if (!checkedNames.contains(name)) {
+                    tryCountObjects = new TryCount(try_count, name);
+                    tryCountObjecctArray.add(tryCountObjects);
+                    checkedNames.add(name);
                 }
 
                 //==============checkOutProgram==================================
@@ -52,12 +69,10 @@ class Authentication {
                     System.out.println(lang.cancel);
                     break;
                 }
-                //==============check NameExistInBase============================
-                boolean exist = base.checkExistName(name);
 
                 //==============start Authentication===============================
-                if (exist) {
-                    auth = authenticationFunction(base, name, tryCountObjecct);
+                if (base.checkExistName(name)) {
+                    auth = authenticationFunction(base, name,tryCountObjecctArray );
 
                 } else {
                     System.out.println(lang.NameNotExist);
@@ -68,23 +83,22 @@ class Authentication {
 
                         Registration reg = new Registration(lang);
                         reg.regAcc(base, lang);
-                        break;
+//                        break;
                     }
                     break;
                 }
-            } while (tryCountObjecct.getTryCount() > 0 && !auth);
+                TryCount tryCountObjects;
+            } while (tryCountObjects.getTryCount() > 0 && !auth);
         } else {
             System.out.println(lang.authentificationLocked);
         }
-
-
     }
 
 
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(BaseInterface base, String name, TryCount tryCount) throws IOException {
+    boolean authenticationFunction(BaseInterface base, String name, ArrayList tryCountObjecctArray) throws IOException, ClassNotFoundException {
         // Answer answer = new Answer();
 
         boolean auth = false;
@@ -107,8 +121,14 @@ class Authentication {
 
         } else {
             System.out.println(lang.nameOrPasswordWrong);
-            tryCount.setTryCount(tryCount.getTryCount() - 1);
-            System.out.println(lang.numberTry + tryCount.getTryCount());
+            System.out.println(lang.doYouWantReg);
+            if (input.checkCommands().equals("yes")) {
+
+                reg.regAcc(base, lang);
+            } else {
+                tryCount;
+                System.out.println(lang.numberTry + tryCount.getTryCount());
+            }
 
             //==============checkOutProgram==================================
 
@@ -126,4 +146,6 @@ class Authentication {
     //check Empty BaseText
     //===============================
 }
+
+
 //25.06.23

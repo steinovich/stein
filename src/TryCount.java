@@ -1,6 +1,6 @@
 public class TryCount {
-    int tryCount;
-    String name;
+    private int tryCount;
+    private String name;
     public TryCount(int tryCount,String name){
         this.tryCount=tryCount;
         this.name=name;
@@ -13,5 +13,8 @@ public class TryCount {
 
     public void setTryCount(int tryCount) {
         this.tryCount = tryCount;
+    }
+    public void decrease(){
+        tryCount--;
     }
 }

@@ -43,10 +43,10 @@ public class Language {
     }
 
     public String setInputLanguage() throws IOException {
+        Scanner scan = new Scanner(System.in);
 
         //  ==================Creat Buffer Read========================
 
-        Scanner scan = new Scanner(System.in);
         fileReader = new FileReader(fileLanguage);
         bufferReader = new BufferedReader(fileReader);
         //  ==================Search all language========================
@@ -66,7 +66,7 @@ public class Language {
 
         while (!allLanguages.contains(generalLanguage)) {
             System.out.println("input correct language:" + allLanguages);
-            generalLanguage ="eng";// scan.nextLine();
+            generalLanguage = scan.nextLine();
         }
         return generalLanguage;
     }
