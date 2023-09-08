@@ -72,8 +72,8 @@ public class BaseObject implements BaseInterface {
         ObjectOutputStream oos = new ObjectOutputStream(fout);
 //        FileInputStream fin = new FileInputStream(file);
 //        ObjectInputStream ois = new ObjectInputStream(fin);
-        Account account ;//= new Account(0, "", 0);
-        ArrayList<Account> accounts = new ArrayList<Account>();
+        Account account ;//= new Account(0, "", 0);/**!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+        ArrayList<Account> accounts = new ArrayList<Account>();/**!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
        // accounts.add(account);
         //accounts = (ArrayList<Account>) ois.readObject();
         ID = accounts.size();
