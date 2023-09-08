@@ -28,12 +28,13 @@ class Authentication {
     public Authentication(Language language) {
         try_count=5;
         lang = language;
-        Registration reg = new Registration(lang);
+        reg = new Registration(lang);
         scan = new Scanner(System.in);
         names = new ArrayList<>();
         input = new Answer(lang);
         names = new ArrayList<>();
         tryCountObjecctArray=new ArrayList<>();
+        checkedNames=new ArrayList<>();
 //        tryCountObjecct = new TryCount(try_count, null);
 
 
@@ -72,7 +73,14 @@ class Authentication {
 
                 //==============start Authentication===============================
                 if (base.checkExistName(name)) {
-                    auth = authenticationFunction(base, name,tryCountObjecctArray );
+                    TryCount tryCount=new TryCount();
+                    for( TryCount tryCountTemp : tryCountObjecctArray){
+                        if((tryCountTemp.getName().equals(name))){
+                            tryCount = tryCountTemp;
+                            break;
+                        }
+                    }
+                    auth = authenticationFunction(base, name,tryCount );
 
                 } else {
                     System.out.println(lang.NameNotExist);
@@ -98,7 +106,7 @@ class Authentication {
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(BaseInterface base, String name, ArrayList tryCountObjecctArray) throws IOException, ClassNotFoundException {
+    boolean authenticationFunction(BaseInterface base, String name, TryCount tryCount) throws IOException, ClassNotFoundException {
         // Answer answer = new Answer();
 
         boolean auth = false;
@@ -126,7 +134,7 @@ class Authentication {
 
                 reg.regAcc(base, lang);
             } else {
-                tryCount;
+                tryCount.decrease();
                 System.out.println(lang.numberTry + tryCount.getTryCount());
             }
 

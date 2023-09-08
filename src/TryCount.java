@@ -5,10 +5,17 @@ public class TryCount {
         this.tryCount=tryCount;
         this.name=name;
     }
+    public TryCount(){
+
+    }
 
     public int getTryCount() {
         return tryCount;
 
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setTryCount(int tryCount) {
