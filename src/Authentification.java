@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 class Authentication {
     Language lang;
-    //    String autentification=;
+    //    String authentication=;
 //    String inputName;
 //    String NameNotExist;
 //    String doYouWantReg;
@@ -15,30 +15,30 @@ class Authentication {
 //    String doYouWantReg;
 //    String doYouWantReg;
 //    String doYouWantReg;
-    int try_count = 5;
+    int Count;
     Scanner scan;
     Registration reg;
     ArrayList<String> names;
     Answer input;
     ArrayList<String> checkedNames;
 
-    TryCount tryCountObjects;
-    ArrayList<TryCount> tryCountObjecctArray;
+    TryCount tryCount;
+    ArrayList<TryCount> tryCountsArray;
 
     public Authentication(Language language) {
-        try_count=5;
+        Count =5;
         lang = language;
         reg = new Registration(lang);
         scan = new Scanner(System.in);
         names = new ArrayList<>();
         input = new Answer(lang);
         names = new ArrayList<>();
-        tryCountObjecctArray=new ArrayList<>();
+        tryCountsArray =new ArrayList<>();
         checkedNames=new ArrayList<>();
-//        tryCountObjecct = new TryCount(try_count, null);
+//        tryCountObject = new TryCount(try_count, null);
 
 
-        ArrayList<String> checkedNames = new ArrayList<>();
+//        ArrayList<String> checkedNames = new ArrayList<>();
     }
     //===============================
     //main  Authentication Function
@@ -47,12 +47,12 @@ class Authentication {
     void authFunc(BaseInterface base) throws IOException, ClassNotFoundException {
         // try_count = 3;
         boolean auth;
-//        TryCount tryCountObjecct;
-//        tryCountObjecct = new TryCount(try_count, null);
+//        TryCount tryCountObject;
+//        tryCountObject = new TryCount(try_count, null);
 
 //        ArrayList<String> checkedNames = new ArrayList<>();
 //        Answer input = new Answer(lang);
-        if (try_count > 0) {
+        if (Count > 0) {
             do {
 //            ifEmptyBaseWrite(baseText);
 
@@ -60,21 +60,21 @@ class Authentication {
                 System.out.println(lang.inputName);
                 String name = scan.nextLine();
                 if (!checkedNames.contains(name)) {
-                    tryCountObjects = new TryCount(try_count, name);
-                    tryCountObjecctArray.add(tryCountObjects);
+                    tryCount = new TryCount(Count, name);
+                    tryCountsArray.add(tryCount);
                     checkedNames.add(name);
                 }
 
                 //==============checkOutProgram==================================
-                if (name.equals("exit") || name.equals("e") || name.equals("отмена")) {
-                    System.out.println(lang.cancel);
-                    break;
-                }
+//                if (name.equals("exit") || name.equals("e") || name.equals("отмена")) {
+//                    System.out.println(lang.cancel);
+//                    break;
+//                }
 
                 //==============start Authentication===============================
                 if (base.checkExistName(name)) {
-                    TryCount tryCount=new TryCount();
-                    for( TryCount tryCountTemp : tryCountObjecctArray){
+                    TryCount tryCount=null;
+                    for( TryCount tryCountTemp : tryCountsArray){
                         if((tryCountTemp.getName().equals(name))){
                             tryCount = tryCountTemp;
                             break;
@@ -91,12 +91,12 @@ class Authentication {
 
                         Registration reg = new Registration(lang);
                         reg.regAcc(base, lang);
-//                        break;
+                        break;
                     }
                     break;
                 }
-                TryCount tryCountObjects;
-            } while (tryCountObjects.getTryCount() > 0 && !auth);
+//                TryCount tryCountObjects;
+            } while (tryCount.getTryCount() > 0 && !auth);
         } else {
             System.out.println(lang.authentificationLocked);
         }
@@ -119,24 +119,27 @@ class Authentication {
         //==============checkOutProgram==================================
         if (passIn == "exit".hashCode() || passIn == "выход".hashCode()) {
             System.out.println(lang.cancel);
-
+            return false;
+        }
 
             //==================check  password for Authentication=========================
 
-        } else if (passIn == basePass) {
+         if (passIn == basePass) {
             auth = true;
             System.out.println(lang.authentificationCompleted);
 
         } else {
             System.out.println(lang.nameOrPasswordWrong);
-            System.out.println(lang.doYouWantReg);
-            if (input.checkCommands().equals("yes")) {
+             tryCount.decrease();
+             System.out.println(lang.numberTry+" " + tryCount.getTryCount());
+             System.out.println(lang.doYouWantReg);
+             if (input.checkCommands().equals("yes")) {
 
                 reg.regAcc(base, lang);
-            } else {
-                tryCount.decrease();
-                System.out.println(lang.numberTry + tryCount.getTryCount());
-            }
+            }else {
+                 System.out.println(lang.doYouHaveAcc);
+
+             }
 
             //==============checkOutProgram==================================
 
