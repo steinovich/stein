@@ -156,69 +156,38 @@ public class BaseObject implements BaseInterface {
     public void addAccount(String name, int pass) throws IOException, ClassNotFoundException {
         int ID;
         ArrayList<Account> accounts = new ArrayList<Account>();
-        FileInputStream fis = new FileInputStream(file);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        accounts = returnAccounts();//(ArrayList<Account>) ois.readObject();//getAccountsArray();
-        ID = accounts.size();
-        Account account = new Account(ID, name, pass);
-        accounts.add(account);
         FileOutputStream fout = new FileOutputStream(file);
         ObjectOutputStream oos = new ObjectOutputStream(fout);
+        if (emptyBaseFile()) {
+            accounts.add(new Account());
+            oos.writeObject(accounts);
+
+        }
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
         oos.writeObject(accounts);
+//        accounts = (ArrayList<Account>) ois.readObject();
+
+//        accounts = returnAccounts();//(ArrayList<Account>) ois.readObject();//getAccountsArray();
+        ID = accounts.size();
         ois.close();
         fis.close();
         fout.close();
         fout.close();
     }
-    public ArrayList returnAccounts() throws IOException {
-        FileInputStream fileInput = new FileInputStream(file);
-        ObjectInputStream outInputStream = new ObjectInputStream(fileInput);
-        ArrayList<Account> accounts = new ArrayList<Account>();
-        try {
-            accounts = (ArrayList<Account>) outInputStream.readObject();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        fileInput.close();
-        outInputStream.close();
-        return accounts;
-
-    }
-
-//    public String getAccount(String part, String name) {
-//        return null;
-//    }
-//
-//    public ArrayList<Account> getAccountsArray() throws IOException, ClassNotFoundException {
-//        FileInputStream fin = new FileInputStream(file);
-//        ObjectInputStream ois = new ObjectInputStream(fin);
-//        ois.readObject();
-//        ArrayList<Account> accounts = (ArrayList<Account>) ois.readObject();
-//        fin.close();
-//        ois.close();
-//        return accounts;
-//    }
-
-
-//    public boolean deleteAccount(String name) throws IOException, ClassNotFoundException {
-//
-//
-//        accounts = (ArrayList<Account>) ois.readObject();
-//        int i = 0;
-//        int Id=accounts.size()-1;
-//        boolean result=false;
-//        Account account = accounts.get(0);
-//        while (i < accounts.size() && !account.getName().equals(name)) {
-//            account = accounts.get(i);
-//            Id = account.getId();
-//            i++;
-//            result= account.getName().equals(name);
+//    public ArrayList returnAccounts() throws IOException {
+//        FileInputStream fileInput = new FileInputStream(file);
+//        ObjectInputStream outInputStream = new ObjectInputStream(fileInput);
+//        ArrayList<Account> accounts = new ArrayList<Account>();
+//        try {
+//            accounts = (ArrayList<Account>) outInputStream.readObject();
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
 //        }
-//        accounts.remove(Id);
-//        oos.writeObject(accounts);
+//        fileInput.close();
+//        outInputStream.close();
+//        return accounts;
 //
-//        System.out.println(language.AccountDeleted);
-//        return result;
 //    }
 }
 
