@@ -1,4 +1,4 @@
-/***03.08.23*/
+/***15.09.23 working*/
 
 
 import java.io.IOException;
@@ -7,13 +7,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-       // String choseLanguage;
-Language language=new Language();
-//language.setInputLanguage();
-      //  System.out.println(language.createdBase);
-
-
-        BaseInterface  base = new BaseObject(language);
+        Language language = new Language();
+        BaseInterface base = new BaseObject(language);
         boolean out;
         Answer answer = new Answer(language);
         Authentication auth = new Authentication(language);
@@ -29,7 +24,7 @@ Language language=new Language();
                     case "yes":
 
                         Registration reg = new Registration(language);
-                        reg.regAcc(base,language);
+                        reg.regAcc(base, language);
                         break;
                     case "no":
                         break;
@@ -44,17 +39,18 @@ Language language=new Language();
                         break;
                     case "no":
                         System.out.println(language.doYouWantReg);
-                        switch (answer.checkCommands()){
+                        switch (answer.checkCommands()) {
                             case "no":
                             case "exit":
                                 break;
                             case "yes":
 
 
-                        System.out.println(language.regNewAccount);
-                        Registration reg = new Registration(language);
-                        reg.regAcc(base,language);
-                        break;}
+                                System.out.println(language.regNewAccount);
+                                Registration reg = new Registration(language);
+                                reg.regAcc(base, language);
+                                break;
+                        }
                         break;
 
                     case "yes":
@@ -76,9 +72,7 @@ Language language=new Language();
     //================================================================
 
 
-
 }
-
 
 
 //25.06.23
