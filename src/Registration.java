@@ -8,7 +8,7 @@ public class Registration {
        Language language=lng;
 
     }
-/**зеленый комментарий*/
+/**зеленый  комментарий*/
     public void regAcc(BaseInterface base, Language language) throws IOException, ClassNotFoundException {
         //===============================
         //input  name
@@ -20,6 +20,7 @@ public class Registration {
         //===============================
         //check Existing Name in BaseText
         //===============================
+
         boolean exist = !base.emptyBaseFile();
         while (exist) {
             exist =base.checkExistName(name);

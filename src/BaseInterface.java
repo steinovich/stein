@@ -8,11 +8,11 @@ public interface BaseInterface {
 
     void addAccount(String name, int pass) throws IOException, ClassNotFoundException;
 
-    int getLastID() throws IOException;
+    int getLastID() throws IOException, ClassNotFoundException;
 
-    int getPass(String name) throws IOException;
+    int getPass(String name) throws IOException, ClassNotFoundException;
 
-    boolean checkExistName(String name) throws IOException;
+    boolean checkExistName(String name) throws IOException, ClassNotFoundException;
 
 //    String getAccount(String part, String name) throws IOException;
 //    boolean deleteAccount(String part, String name) throws IOException;
