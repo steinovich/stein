@@ -60,13 +60,6 @@ public class BaseObject implements BaseInterface {
         int i = 0;
         while (i < accounts.size() && !exist) {
             account = accounts.get(i);
-//            accounts.add(new Account(1, "1", 1));
-//            accounts.add(new Account(1, "2", 1));
-//            accounts.add(new Account(1, "3", 1));
-//            System.out.println(accounts.get(0).getName());
-//            System.out.println(accounts.get(1).getName());
-//            System.out.println(accounts.get(2).getName());
-//            System.out.println(accounts.get(3).getName());
             i++;
             exist = account.getName().equals(name);
         }
@@ -85,15 +78,6 @@ public class BaseObject implements BaseInterface {
         }
     }
 
-//    public void addFirstEmptyAccount() throws IOException {
-//        ArrayList<Account> accounts = new ArrayList<>();
-//        accounts.add(new Account(0, "", -1));
-//        FileOutputStream fout = new FileOutputStream(file);
-//        ObjectOutputStream oos = new ObjectOutputStream(fout);
-//        oos.writeObject(accounts);
-//        fout.close();
-//        fout.close();
-//    }
 
     public void addNewAccount(int ID, String name, int pass) throws IOException, ClassNotFoundException {
         ArrayList<Account> accounts = readAccounts();
