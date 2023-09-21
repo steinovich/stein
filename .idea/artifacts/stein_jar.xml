@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/stein_jar</output-path>
     <root id="archive" name="stein.jar">
       <element id="module-output" name="stein" />
+      <element id="library" level="project" name="src" />
     </root>
   </artifact>
 </component>

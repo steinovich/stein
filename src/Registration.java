@@ -4,43 +4,47 @@ import java.util.Scanner;
 public class Registration {
     Language language;
     private final Scanner scan = new Scanner(System.in);
-    public Registration(Language lng){
-       Language language=lng;
+    BaseInterface base;
+
+    public Registration(Language lng) {
+        Language language = lng;
 
     }
-/**зеленый  комментарий*/
+
+    /**
+     * зеленый  комментарий
+     */
     public void regAcc(BaseInterface base, Language language) throws IOException, ClassNotFoundException {
-        //===============================
-        //input  name
-        //===============================
+        this.language=language;
+        this.base = base;
+        String name = inputName();
+        checkExistName(name);
+        base.addAccount(name, inputPassword());
+        System.out.println(language.registrationCompleted);
+    }
+
+    String inputName() {
         System.out.println(language.inputName);
-        String name;
-        name = scan.nextLine();
+        return scan.nextLine();
+    }
 
-        //===============================
-        //check Existing Name in BaseText
-        //===============================
-
+    void checkExistName(String name) throws IOException, ClassNotFoundException {
         boolean exist = !base.emptyBaseFile();
         while (exist) {
-            exist =base.checkExistName(name);
+            exist = base.checkExistName(name);
             if (exist) {
                 System.out.println(language.NameAlreadyExist);
                 System.out.println(language.inputOtherName);
                 name = scan.nextLine();
             }
         }
-        //===============================
-        //input  password
-        //===============================
+    }
+
+    int inputPassword() {
         System.out.println(language.inputPassword);
-        int pass = scan.nextLine().hashCode();
-        //===============================
-        //Add account in BaseText
-        //===============================
-        base.addAccount(name, pass);
-        System.out.println(language.registrationCompleted);
+        return scan.nextLine().hashCode();
+
     }
 }
 
-//25.06.23
+//20.09.23

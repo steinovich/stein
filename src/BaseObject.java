@@ -79,6 +79,12 @@ public class BaseObject implements BaseInterface {
     }
 
 
+    public void addFirstAccount(int ID, String name, int pass) throws IOException {
+        ArrayList<Account> accounts = new ArrayList<>();
+        accounts.add(new Account(ID, name, pass));
+        writeAccounts(accounts);
+    }
+
     public void addNewAccount(int ID, String name, int pass) throws IOException, ClassNotFoundException {
         ArrayList<Account> accounts = readAccounts();
         accounts.add(new Account(ID, name, pass));
@@ -105,12 +111,6 @@ public class BaseObject implements BaseInterface {
         oos.writeObject(accounts);
         fout.close();
         fout.close();
-    }
-
-    public void addFirstAccount(int ID, String name, int pass) throws IOException {
-        ArrayList<Account> accounts = new ArrayList<>();
-        accounts.add(new Account(ID, name, pass));
-        writeAccounts(accounts);
     }
 }
 

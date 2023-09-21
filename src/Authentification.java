@@ -4,17 +4,6 @@ import java.util.Scanner;
 
 class Authentication {
     Language lang;
-    //    String authentication=;
-//    String inputName;
-//    String NameNotExist;
-//    String doYouWantReg;
-//
-//    String cancel;
-//    String doYouWantReg;
-//    String doYouWantReg;
-//    String doYouWantReg;
-//    String doYouWantReg;
-//    String doYouWantReg;
     int Count;
     Scanner scan;
     Registration reg;
@@ -45,13 +34,8 @@ class Authentication {
     //===============================
 
     void authFunc(BaseInterface base) throws IOException, ClassNotFoundException {
-        // try_count = 3;
         boolean auth;
-//        TryCount tryCountObject;
-//        tryCountObject = new TryCount(try_count, null);
 
-//        ArrayList<String> checkedNames = new ArrayList<>();
-//        Answer input = new Answer(lang);
         if (Count > 0) {
             do {
 //            ifEmptyBaseWrite(baseText);
@@ -59,17 +43,8 @@ class Authentication {
                 System.out.println(lang.authentification);
                 System.out.println(lang.inputName);
                 String name = scan.nextLine();
-                if (!checkedNames.contains(name)) {
-                    tryCount = new TryCount(Count, name);
-                    tryCountsArray.add(tryCount);
-                    checkedNames.add(name);
-                }
 
-                //==============checkOutProgram==================================
-//                if (name.equals("exit") || name.equals("e") || name.equals("отмена")) {
-//                    System.out.println(lang.cancel);
-//                    break;
-//                }
+                setTryCount(name);
 
                 //==============start Authentication===============================
                 if (base.checkExistName(name)) {
@@ -80,7 +55,7 @@ class Authentication {
                             break;
                         }
                     }
-                    auth = authenticationFunction(base, name,tryCount );
+                    auth = authentication(base, name,tryCount );
 
                 } else {
                     System.out.println(lang.NameNotExist);
@@ -101,12 +76,19 @@ class Authentication {
             System.out.println(lang.authentificationLocked);
         }
     }
+    void setTryCount(String name){
+        if (!checkedNames.contains(name)) {
+            tryCount = new TryCount(Count, name);
+            tryCountsArray.add(tryCount);
+            checkedNames.add(name);
+        }
+    }
 
 
     //===============================
     //additional Authentication Function
     //===============================
-    boolean authenticationFunction(BaseInterface base, String name, TryCount tryCount) throws IOException, ClassNotFoundException {
+    boolean authentication(BaseInterface base, String name, TryCount tryCount) throws IOException, ClassNotFoundException {
         // Answer answer = new Answer();
 
         boolean auth = false;
@@ -137,7 +119,7 @@ class Authentication {
 
                 reg.regAcc(base, lang);
             }else {
-                 System.out.println(lang.doYouHaveAcc);
+                   //System.out.println(lang.doYouHaveAcc);
 
              }
 
